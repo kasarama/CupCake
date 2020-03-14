@@ -22,7 +22,7 @@ public class HelpClass {
             case "Orange":
             case "Lemon":
                 bPrice=8;
-            case"BlueChees":
+            case"BlueCheese":
                 bPrice=9;
         default:
             System.out.println("Wrong componentName");}

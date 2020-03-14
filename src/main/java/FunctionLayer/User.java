@@ -12,6 +12,7 @@ public class User {
         this.role = role;
     }
 
+    private int id; // just used to demo retrieval of autogen keys in UserMapper
     private String email;
     private String password; // Should be hashed and secured
     private String role;
@@ -38,6 +39,14 @@ public class User {
 
     public void setRole( String role ) {
         this.role = role;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId( int id ) {
+        this.id = id;
     }
 
 }

@@ -1,68 +1,66 @@
-<%-- 
-    Document   : index
-    Created on : Aug 22, 2017, 2:01:06 PM
-    Author     : kasper
---%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Welcome page</title>
-    </head>
-    <body>
-        <h1>Welcome to Sem 2</h1>
-        
-        <table>
-            <tr><td>Login</td>
-                <td>
-                    <form name="login" action="FrontController" method="POST">
-                        <input type="hidden" name="taget" value="login">
-                        Email:<br>
-                        <input type="text" name="email" value="someone@nowhere.com">
-                        <br>
-                        Password:<br>
-                        <input type="password" name="password" value="sesam">
-                        <br>
-                        <input type="submit" value="Submit">
-                    </form>
-                </td>
-                <td>Or Register</td>
-                <td>
-                    <form name="register" action="FrontController" method="POST">
-                        <input type="hidden" name="taget" value="register">
-                        Email:<br>
-                        <input type="text" name="email" value="someone@nowhere.com">
-                        <br>
-                        Password:<br>
-                        <input type="password" name="password1" value="sesam">
-                        <br>
-                        Retype Password:<br>
-                        <input type="password" name="password2" value="sesam">
-                        <br>
-                        <input type="submit" value="Submit">
-                    </form>
-                </td>
-            </tr>
-        </table>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Cupcake buttiken</title>
+</head>
+<body>
+<h1>Cupcake projekt</h1>
+<br><br>
+<div>items in cart:  ${requestScope.cart}</div>
+<br><br>
+<form name="login" action="FrontController" method="POST">
+    <input type="hidden" name="taget" value="newLine">
+    <br>
+    Vælg bund
+    <select name="bottom" value="Vælg bund">
+        <option value="Chocolate">Chocolate</option>
+        <option value="Vanilla">Vanilla</option>
+        <option value="Nutmeg">Nutmeg</option>
+        <option value="Pistacio">Pistacio</option>
+        <option value="Almond">Almond</option>
+    </select>
+    <br>
+    Vælg topping
+    <select name="topping" value="Vælg topping">
+        <option value="Chocolate">Chocolate</option>
+        <option value="Blueberry">Blueberry</option>
+        <option value="Rasberry">Rasberry</option>
+        <option value="Crispy">Crispy</option>
+        <option value="Strawberry">Strawberry</option>
+        <option value="RumRaisin">RumRaisin</option>
+        <option value="Orange">Orange</option>
+        <option value="Lemon">Lemon</option>
+        <option value="BlueCheese">BlueCheese</option>
+    </select>
+    <br>
+    Vælg antal
+    <input type="number" name="quantity" value=1 min="1" max="50">
+    <input type="submit" value="Læg i kurv" >
+</form>
 
 
-<%--        Bare lige se I har en ide om hvad vi forslå I ikke gør ! det hedder scpript lets --%>
-<%--        <% String error = (String) request.getAttribute( "error");--%>
-<%--           if ( error != null) { --%>
-<%--               out.println("<H2>Error!!</h2>");--%>
-<%--               out.println(error);--%>
-<%--           }--%>
-<%--        %>--%>
+${sessionScope.msg}
 
-        <c:if test = "${requestScope.error!= null}" >
+<c:if test = "${requestScope.error!= null}" >
 
-           <h2>Error ! </h2>
-            ${requestScope.error}
+    <h2>Error ! </h2>
+    ${requestScope.error}
 
-        </c:if>
-    </body>
+</c:if>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
 </html>

@@ -13,13 +13,50 @@ public class Cupcake {
         this.bottom = bottom;
         this.topping = topping;
     }
-    private static int price(String bottom, String topping) {
-        int priceB=0;
-        int priceT=0;
-        Map<String, Integer> priceList = new HashMap<>();
 
+    public int price (String bottom, String topping) {
+        int bPrice=0;
+        int tPrice=0;
 
-        return priceB + priceT;
+        switch (bottom){
+            case "Chocolate" :
+            case "Vanilla":
+            case "Nutmeg":
+                bPrice=5;
+                break;
+            case "Pistacio":
+                bPrice=6;
+                break;
+            case "Almond":
+                bPrice=7;
+                break;
+            default:
+                System.out.println("Wrong componentName");}
+
+        switch (topping){
+            case "Chocolate":
+            case "Blueberry":
+            case "Rasberry":
+                tPrice=5;
+                break;
+            case "Crispy":
+            case "Strawberry":
+                tPrice=6;
+                break;
+            case "RumRaisin":
+                tPrice=7;
+                break;
+            case "Orange":
+            case "Lemon":
+                tPrice=8;
+                break;
+            case"BlueCheese":
+                tPrice=9;
+                break;
+            default:
+                System.out.println("Wrong componentName");}
+
+        return bPrice+tPrice;
     }
 
     public String getBottom() {

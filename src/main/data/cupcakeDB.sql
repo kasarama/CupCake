@@ -16,6 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `components`
+--
+
+DROP TABLE IF EXISTS `components`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `components` (
+  `component` varchar(45) NOT NULL,
+  `price` int DEFAULT NULL,
+  PRIMARY KEY (`component`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `components`
+--
+
+LOCK TABLES `components` WRITE;
+/*!40000 ALTER TABLE `components` DISABLE KEYS */;
+INSERT INTO `components` VALUES ('Almond',7),('Blueberry',5),('BlueChees',9),('Chocolate',5),('Crispy',6),('Lemon',8),('Nutmeg',5),('Orange',8),('Pistacio',6),('Rasberry',5),('RumRaisin',7),('Strawberry',6),('Vanilla',5);
+/*!40000 ALTER TABLE `components` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `customers`
 --
 
@@ -43,17 +67,18 @@ LOCK TABLES `customers` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `orderlines`
+-- Table structure for table `orderdetails`
 --
 
-DROP TABLE IF EXISTS `orderlines`;
+DROP TABLE IF EXISTS `orderdetails`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `orderlines` (
+CREATE TABLE `orderdetails` (
   `orderLineID` int NOT NULL AUTO_INCREMENT,
-  `product` varchar(45) DEFAULT NULL,
-  `price` int DEFAULT NULL,
   `orderID` int DEFAULT NULL,
+  `bottom` varchar(45) DEFAULT NULL,
+  `topping` varchar(45) DEFAULT NULL,
+  `quantity` int DEFAULT NULL,
   PRIMARY KEY (`orderLineID`),
   UNIQUE KEY `orderLineID_UNIQUE` (`orderLineID`),
   KEY `orderID_idx` (`orderID`),
@@ -62,12 +87,12 @@ CREATE TABLE `orderlines` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `orderlines`
+-- Dumping data for table `orderdetails`
 --
 
-LOCK TABLES `orderlines` WRITE;
-/*!40000 ALTER TABLE `orderlines` DISABLE KEYS */;
-/*!40000 ALTER TABLE `orderlines` ENABLE KEYS */;
+LOCK TABLES `orderdetails` WRITE;
+/*!40000 ALTER TABLE `orderdetails` DISABLE KEYS */;
+/*!40000 ALTER TABLE `orderdetails` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -129,4 +154,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-13  0:20:50
+-- Dump completed on 2020-03-13 21:10:40
