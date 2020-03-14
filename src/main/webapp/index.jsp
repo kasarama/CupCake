@@ -13,12 +13,24 @@
 
     <title>Cupcake buttiken</title>
 </head>
+
+
 <body>
+
+<div >
+
+    <form name="showCart" action="FrontController" method="POST">
+        <input type="hidden" name="taget" value="showCart">
+        <input type="image" src="img/cart.png" width="20" height="auto" alt="Submit">${requestScope.cart}
+    </form>
+
+</div>
+
 <h1>Cupcake projekt</h1>
 <br><br>
-<div>items in cart:  ${requestScope.cart}</div>
+<div></div>
 <br><br>
-<form name="login" action="FrontController" method="POST">
+<form name="addItems" action="FrontController" method="POST">
     <input type="hidden" name="taget" value="newLine">
     <br>
     Vælg bund

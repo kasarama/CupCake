@@ -37,7 +37,7 @@ public class OrderMapper {
             //    PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             PreparedStatement ps = con.prepareStatement(SQL);
             ResultSet resultSet = ps.executeQuery();
-            
+
             while (resultSet.next()) {
                 number = resultSet.getInt("cartnumber");
             }

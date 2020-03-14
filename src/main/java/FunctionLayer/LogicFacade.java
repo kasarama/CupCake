@@ -20,11 +20,11 @@ public class LogicFacade {
         return user;
     }
     public static void addToOrder (String bottom, String topping, int quantity) throws LoginSampleException {
-
         OrderMapper.addToOrder(bottom, topping, quantity);
-
     }
-    public  static void cartNumber (){
+
+    public static void showCart (){
+
 
     }
 
