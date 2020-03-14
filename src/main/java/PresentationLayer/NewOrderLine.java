@@ -17,8 +17,6 @@ public class NewOrderLine extends Command {
 
         System.out.println("items in cart: " + OrderMapper.cartNumber());
         request.setAttribute("cart", OrderMapper.cartNumber());
-
-
         return "index";
     }
 
