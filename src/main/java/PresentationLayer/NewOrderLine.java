@@ -1,5 +1,6 @@
 package PresentationLayer;
 
+import DBAccess.OrderMapper;
 import FunctionLayer.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,16 +13,10 @@ public class NewOrderLine extends Command {
         String bottom = request.getParameter( "bottom" );
         String topping = request.getParameter( "topping" );
         int quantity = Integer.parseInt(request.getParameter("quantity"));
-        Order order =LogicFacade.addToOrder(bottom, topping, quantity);
-        System.out.println("order" + order.toString());
-        request.setAttribute("msg", "Order has been saved or maybe has not - idk");
-        int itemsInCart = 0;
-        for (Cupcake cupcake: order.getProducts().keySet() ){
-            int tmp = itemsInCart;
-            itemsInCart=order.getProducts().get(cupcake) +tmp;
-        }
-        System.out.println(itemsInCart +" items in cart");
-        request.setAttribute("cart", itemsInCart);
+        LogicFacade.addToOrder(bottom, topping, quantity);
+
+        System.out.println("items in cart: " + OrderMapper.cartNumber());
+        request.setAttribute("cart", OrderMapper.cartNumber());
 
 
         return "index";
