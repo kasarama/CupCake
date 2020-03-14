@@ -79,11 +79,12 @@ CREATE TABLE `orderdetails` (
   `bottom` varchar(45) DEFAULT NULL,
   `topping` varchar(45) DEFAULT NULL,
   `quantity` int DEFAULT NULL,
+  `status` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`orderLineID`),
   UNIQUE KEY `orderLineID_UNIQUE` (`orderLineID`),
   KEY `orderID_idx` (`orderID`),
   CONSTRAINT `orderID` FOREIGN KEY (`orderID`) REFERENCES `orders` (`orderID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -92,6 +93,7 @@ CREATE TABLE `orderdetails` (
 
 LOCK TABLES `orderdetails` WRITE;
 /*!40000 ALTER TABLE `orderdetails` DISABLE KEYS */;
+INSERT INTO `orderdetails` VALUES (1,NULL,'Choc','Van',3,NULL),(2,NULL,'Chocolate','Chocolate',1,'inCart'),(11,NULL,NULL,NULL,1,'inCart'),(12,NULL,NULL,NULL,18,'inCart'),(13,NULL,'d',NULL,50,NULL),(14,NULL,'Pistacio','Rasberry',3,'inCart'),(15,NULL,'Chocolate','Chocolate',1,'inCart');
 /*!40000 ALTER TABLE `orderdetails` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -110,7 +112,7 @@ CREATE TABLE `orders` (
   UNIQUE KEY `orderID_UNIQUE` (`orderID`),
   KEY `e-mail_idx` (`e-mail`),
   CONSTRAINT `e-mail` FOREIGN KEY (`e-mail`) REFERENCES `customers` (`e-mail`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -154,4 +156,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-13 21:10:40
+-- Dump completed on 2020-03-14  9:51:47
