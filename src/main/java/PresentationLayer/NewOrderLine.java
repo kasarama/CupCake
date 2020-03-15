@@ -13,10 +13,11 @@ public class NewOrderLine extends Command {
         String bottom = request.getParameter( "bottom" );
         String topping = request.getParameter( "topping" );
         int quantity = Integer.parseInt(request.getParameter("quantity"));
-        LogicFacade.addToOrder(bottom, topping, quantity);
+        String session = request.getSession().getId();
+        LogicFacade.addToOrder(bottom, topping, quantity, session);
 
-        System.out.println("items in cart: " + OrderMapper.cartNumber());
-        request.setAttribute("cart", OrderMapper.cartNumber());
+        System.out.println("items in cart: " + OrderMapper.cartNumber(request.getSession().getId()));
+        request.setAttribute("cart", OrderMapper.cartNumber(request.getSession().getId()));
         return "index";
     }
 

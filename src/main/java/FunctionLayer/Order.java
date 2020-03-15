@@ -17,30 +17,28 @@ public class Order {
     }
 
     public void addCupcake (Cupcake cupcake, int quantity){
-        for(Cupcake c: products.keySet()) {
-            if (cupcake.equals(c)) {
-                int newQuantity = products.get(c) + quantity;
-
-                products.put(cupcake, newQuantity);
-            } else products.put(cupcake, quantity);
-        }
+               if (products.containsKey(cupcake)){
+            products.replace(cupcake, products.get(cupcake)+quantity);
+        }else {products.put(cupcake, quantity);}
     }
 
     @Override
     public String toString() {
-        return "Order{" +
-                "id=" + id +
-                ", sum=" + sum +
-                ", products=" + products.keySet().toString() +
-                '}';
+String cupcakes="";
+        for (Cupcake c: products.keySet()) {
+            String tmp = cupcakes;
+            cupcakes= tmp + "\n" + c.getBottom() + "-"+c.getTopping()+ "-"+products.get(c);
+
+        }
+        return "Order: "  + cupcakes    ;
     }
 
     public int sum(){
         int sum=0;
-        for (Cupcake cupcake:products.keySet()) {
-            sum=sum+(cupcake.getPrice()*getProducts().get(cupcake)); //pricer of one cupcake multiplied by quantity
-
-        }return sum;
+        for (Cupcake cupcake: products.keySet()) {
+            sum=sum+(cupcake.getPrice()*getProducts().get(cupcake)); //price of one cupcake multiplied by quantity
+            }
+        return sum;
     }
 
     public HashMap<Cupcake, Integer> getProducts() {

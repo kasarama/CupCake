@@ -19,8 +19,8 @@ public class LogicFacade {
         UserMapper.createUser( user );
         return user;
     }
-    public static void addToOrder (String bottom, String topping, int quantity) throws LoginSampleException {
-        OrderMapper.addToOrder(bottom, topping, quantity);
+    public static void addToOrder (String bottom, String topping, int quantity, String session) throws LoginSampleException {
+        OrderMapper.addToOrder(bottom, topping, quantity, session);
     }
 
     public static void showCart (){
