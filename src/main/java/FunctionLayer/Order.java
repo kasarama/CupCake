@@ -33,12 +33,18 @@ String cupcakes="";
         return "Order: "  + cupcakes    ;
     }
 
-    public int sum(){
-        int sum=0;
-        for (Cupcake cupcake: products.keySet()) {
-            sum=sum+(cupcake.getPrice()*getProducts().get(cupcake)); //price of one cupcake multiplied by quantity
-            }
-        return sum;
+    public void removeAll(){ //removes all Cupcakes from product
+         products.clear();
+    }
+
+    public  int sum(){
+        int priceSum=0;
+        for (Cupcake cupcake : products.keySet()) {
+            int tmp=priceSum;
+            priceSum=tmp+(cupcake.getPrice()*products.get(cupcake)); //price of one cupcake multiplied by quantity
+        }
+        return priceSum;
+
     }
 
     public HashMap<Cupcake, Integer> getProducts() {
@@ -60,6 +66,7 @@ String cupcakes="";
     public void setSum(int sum) {
         this.sum = sum;
     }
+
     public int items() {
         int itemsNumber=0;
         for (Cupcake cupcake: products.keySet()) {
