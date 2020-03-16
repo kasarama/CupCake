@@ -15,6 +15,9 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+CREATE DATABASE  IF NOT EXISTS `useradmin`;
+
+USE `useradmin`;
 --
 -- Table structure for table `components`
 --
@@ -66,6 +69,29 @@ LOCK TABLES `customers` WRITE;
 /*!40000 ALTER TABLE `customers` ENABLE KEYS */;
 UNLOCK TABLES;
 
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(90) NOT NULL,
+  `password` varchar(45) NOT NULL,
+  `role` varchar(20) NOT NULL DEFAULT 'customer',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email_UNIQUE` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `users`
+--
+LOCK TABLES `users` WRITE;
+INSERT INTO `users` VALUES
+(1,'maja@olskercupcakes.com','Maja','customer'),
+(2,'jesper@olskercupcakes.com','Jesper','customer'),
+(3,'admin@olskercupcakes.com','admin','employee');
+UNLOCK TABLES;
 --
 -- Table structure for table `orderdetails`
 --

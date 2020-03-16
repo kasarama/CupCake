@@ -9,11 +9,13 @@ import java.sql.SQLException;
 
  @author kasper
  */
-public class Connector {
-
-    private static final String URL = "jdbc:mysql://localhost:3306/cupcake?serverTimezone=UTC";
-    private static final String USERNAME = "root";
-    private static final String PASSWORD = "1909145380Hanna";
+public class Connector
+{
+    private static final String URL = "jdbc:mysql://64.225.76.1:3306/useradmin?";
+    //private static final String URL = "jdbc:mysql://localhost:3306/cupcake?serverTimezone=UTC";
+    private static final String USERNAME = "admin";
+    private static final String PASSWORD = "CakeBoss#Of#Cups_2020";
+    //private static final String PASSWORD = "1909145380Hanna";
 
     private static Connection singleton;
 
@@ -28,5 +30,4 @@ public class Connector {
         }
         return singleton;
     }
-
 }
