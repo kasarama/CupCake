@@ -15,7 +15,6 @@ public class SaveOrder extends Command {
 
         Order order = OrderLines.getOrder();
                 OrderMapper.newOrder("tmp@mail", order, "inCart");
-
         request.setAttribute("msg", "Din ordre er nu gemt i din kurv og du kan fortsætte med den når du vil");
         return "index";
 
