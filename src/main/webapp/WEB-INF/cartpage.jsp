@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: magda
@@ -13,6 +14,10 @@
 <body>
 <h1>Her is the cart page</h1>
 
+
+
+
+
 <table>
     <tr>
         <th>Bund</th>
@@ -20,12 +25,16 @@
         <th>Pris</th>
         <th>Antal</th>
     </tr>
+
+<c:forEach var="item" items="${requestScope.items}">
     <tr>
-        <th>a</th>
-        <th>b</th>
-        <th>c</th>
-        <th>d</th>
+    <c:forEach var="detail" items="${item}">
+        <th>${detail}</th>
+    </c:forEach>
     </tr>
+</c:forEach>
+
+
     <tr>
         <th>
         <form name="confirmOrder" action="FrontController" method="POST">
@@ -41,6 +50,18 @@
         </th>
     </tr>
 </table>
+
+<%
+    out.println("Loop will run 5 times.<br>");
+    int i = 1;
+    // while loop that runs five times
+    while (i<6) {
+        out.println("we are in loop value is : "+i+"<br>");
+        i++;
+    }
+    out.println("Now we are out of while loop.");
+%>
+
 
 <script>
     function msg() {
