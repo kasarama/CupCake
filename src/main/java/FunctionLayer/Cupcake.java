@@ -8,6 +8,7 @@ public class Cupcake {
     private String bottom;
     private String topping;
     private int price;
+    private int counter;
 
     public Cupcake(String bottom, String topping) {
         this.price = price;
