@@ -4,11 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+//testing git
 public class Cupcake {
     private String bottom;
     private String topping;
     private int price;
     private int counter;
+    private int testingGit;
 
     public Cupcake(String bottom, String topping) {
         this.price = price;
