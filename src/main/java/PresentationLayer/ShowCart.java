@@ -8,6 +8,7 @@ import FunctionLayer.OrderLines;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+
 //Magdalena
 public class ShowCart extends Command {
     //todo save each cupcake and its quantity in an array, add each array to the list and set as an attribute on request
@@ -25,21 +26,8 @@ public class ShowCart extends Command {
             cartLines.add(line);
         }
         request.setAttribute("items", cartLines);
+        request.setAttribute("sum", order.getSum());
 
         return "cartpage";
     }
 }
-/*
-
-<%
-	out.println("Loop will run 5 times.<br>");
-        int i = 1;
-	// while loop that runs five times
-        while (i<6) {
-            out.println("we are in loop value is : "+i+"<br>");
-	    i++;
-        }
-        out.println("Now we are out of while loop.");
-    %>
-
- */
