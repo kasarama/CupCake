@@ -60,6 +60,14 @@ String cupcakes="";
     public void setSum(int sum) {
         this.sum = sum;
     }
+    public int items() {
+        int itemsNumber=0;
+        for (Cupcake cupcake: products.keySet()) {
+            int tmp = itemsNumber;
+            itemsNumber = tmp+products.get(cupcake);
+        }
+        return itemsNumber;
+    }
 
 
 }

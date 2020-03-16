@@ -1,9 +1,12 @@
+<%@ page import="FunctionLayer.OrderLines" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!doctype html>
 <html lang="en">
 <head>
+
+
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -16,6 +19,17 @@
 
 
 <body>
+
+
+<%!
+    @Override
+    public void jspInit() {
+        OrderLines.initOrder();
+    }
+%>
+<%
+    request.setAttribute("orderlines", OrderLines.getOrder());
+%>
 
 <div >
 

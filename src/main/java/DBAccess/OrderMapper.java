@@ -7,10 +7,10 @@ import FunctionLayer.Order;
 import java.sql.*;
 
 public class OrderMapper {
-    public static void addToOrder(String bottom, String topping, int quantity, String session) throws LoginSampleException {
+    public static void addToOrder(String bottom, String topping, int quantity, String sessionID) throws LoginSampleException {
             try {
                 Connection con = Connector.connection();
-                String SQL = "INSERT INTO orderdetails (bottom, topping, quantity, status, session) VALUES (?, ?, ?, ?,?)";
+                String SQL = "INSERT INTO orderdetails (bottom, topping, quantity, status, sessionID) VALUES (?, ?, ?, ?,?)";
                 System.out.println(SQL);
             //    PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
                 PreparedStatement ps = con.prepareStatement(SQL);
@@ -18,7 +18,7 @@ public class OrderMapper {
                 ps.setString(2, topping);
                 ps.setInt(3, quantity);
                 ps.setString(4, "inCart");
-                ps.setString(5, session);
+                ps.setString(5, sessionID);
                 ps.executeUpdate();
                 System.out.println("executed");
 
@@ -27,36 +27,14 @@ public class OrderMapper {
                     ClassNotFoundException ex) {
                 throw new LoginSampleException(ex.getMessage());
             }
-
-    }
-    public  static int cartNumber(String session) throws LoginSampleException {
-        int number=0;
-        try {
-            Connection con = Connector.connection();
-            String SQL = "select sum(quantity) as cartnumber from orderdetails where status='inCart' and session='"+session+"'";
-
-            //    PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
-            PreparedStatement ps = con.prepareStatement(SQL);
-            ResultSet resultSet = ps.executeQuery();
-
-            while (resultSet.next()) {
-                number = resultSet.getInt("cartnumber");
-            }
-
-        } catch (SQLException |
-                ClassNotFoundException ex) {
-            throw new LoginSampleException(ex.getMessage());
-        }
-        return number;
-
     }
 
-    public static Order newOrder (String email, String session) throws LoginSampleException {
-        Order order= new Order();
+    public static Order newOrder (String email, Order order, String status) throws LoginSampleException {
+        //todo
+
         try{
             Connection con = Connector.connection();
-            String SQL = "SELECT * FROM cupcake.orderdetails where session='"+session+"'";
-            System.out.println(SQL);
+            String SQL = "Insert into orders (email, sum, status) values ('"+email+ "', "+order.getSum()+", '"+status+"')";
             PreparedStatement ps = con.prepareStatement(SQL);
             ResultSet resultSet =ps.executeQuery(SQL);
             while(resultSet.next()){
@@ -73,11 +51,8 @@ public class OrderMapper {
         {
             throw new LoginSampleException(ex.getMessage());
         }
-        order.setId(orderID());
-        System.out.println("orderID: "+order.getId());
         order.setSum(order.sum());
-        System.out.println("order sum: "+order.getSum());
-        System.out.println(order.toString());
+        System.out.println("order filled up with cupcakes");
         return order;
     }
 
@@ -99,6 +74,44 @@ public class OrderMapper {
             throw new LoginSampleException(ex.getMessage());
         }
         return id+1;
+    }
+
+    public static void saveOrder(Order order, String sessionID, String email) throws LoginSampleException {
+        //todo save order and order details in DB :
+        // insert into orders,
+        // delete from orderdetiles where given sessionID,
+        // insert into orderdetiles,
+        // change status from inCart to panding
+        /*
+        "insert into orders (email, sum) values ('"+email"+"',"+sum+")";
+         */
+
+        try{
+            Connection con = Connector.connection();
+            String orderSQL = "insert into orders (email, sum) values ('"+email+"',"+order.getSum()+")";
+            String  deleteDetailsSQL= "delete from orderdetails where status='inCart' and sessionID='"+sessionID+"'";
+
+            for (int i = 0; i < order.getProducts().keySet().size(); i++) {
+                String bottom;
+                String topping;
+                int quantity;
+                String  saveDetailsSQL= "select max(OrderID) as id from orders";
+
+            }
+            int orderID;
+            PreparedStatement ps = con.prepareStatement(orderSQL);
+            ResultSet resultSet = ps.executeQuery(orderSQL);
+            while (resultSet.next()) {
+                orderID = resultSet.getInt("id");
+            }
+
+        } catch(SQLException |
+                ClassNotFoundException ex )
+
+        {
+            throw new LoginSampleException(ex.getMessage());
+        }
+
     }
 
 

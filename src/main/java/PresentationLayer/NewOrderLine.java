@@ -14,10 +14,10 @@ public class NewOrderLine extends Command {
         String topping = request.getParameter( "topping" );
         int quantity = Integer.parseInt(request.getParameter("quantity"));
         String session = request.getSession().getId();
-        LogicFacade.addToOrder(bottom, topping, quantity, session);
-
-        System.out.println("items in cart: " + OrderMapper.cartNumber(request.getSession().getId()));
-        request.setAttribute("cart", OrderMapper.cartNumber(request.getSession().getId()));
+        Cupcake cupcake = new Cupcake(bottom, topping);
+     OrderLines.getOrder().addCupcake(new Cupcake(bottom, topping),quantity);
+        int items= OrderLines.getOrder().items();
+        request.setAttribute("cart", items);
         return "index";
     }
 
