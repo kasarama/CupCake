@@ -66,6 +66,7 @@ CREATE TABLE `customers` (
 
 LOCK TABLES `customers` WRITE;
 /*!40000 ALTER TABLE `customers` DISABLE KEYS */;
+INSERT INTO `customers` VALUES ('a@a',NULL,NULL,NULL,NULL,NULL),('aaa@aaa.aaa','Aa','Aa',100,'Blah blah',2200),('b@b',NULL,NULL,NULL,NULL,NULL),('c@c',NULL,NULL,NULL,NULL,NULL),('d@d',NULL,NULL,NULL,NULL,NULL),('e@e',NULL,NULL,NULL,NULL,NULL),('tmp@mail','tmpName','tmpLastname',500,'Skolegade 3',2200);
 /*!40000 ALTER TABLE `customers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -110,7 +111,7 @@ CREATE TABLE `orderdetails` (
   UNIQUE KEY `orderLineID_UNIQUE` (`orderLineID`),
   KEY `orderID_idx` (`orderID`),
   CONSTRAINT `orderID` FOREIGN KEY (`orderID`) REFERENCES `orders` (`orderID`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=126 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -119,7 +120,7 @@ CREATE TABLE `orderdetails` (
 
 LOCK TABLES `orderdetails` WRITE;
 /*!40000 ALTER TABLE `orderdetails` DISABLE KEYS */;
-INSERT INTO `orderdetails` VALUES (1,NULL,'Choc','Van',3,NULL),(2,NULL,'Chocolate','Chocolate',1,'inCart'),(11,NULL,NULL,NULL,1,'inCart'),(12,NULL,NULL,NULL,18,'inCart'),(13,NULL,'d',NULL,50,NULL),(14,NULL,'Pistacio','Rasberry',3,'inCart'),(15,NULL,'Chocolate','Chocolate',1,'inCart');
+INSERT INTO `orderdetails` VALUES (118,35,'Chocolate','Crispy',2,'inCart'),(119,35,'Pistacio','Rasberry',3,'inCart'),(120,35,'Nutmeg','Chocolate',3,'inCart'),(121,36,'Vanilla','Chocolate',2,'inCart'),(122,36,'Nutmeg','Crispy',1,'inCart'),(123,37,'Vanilla','RumRaisin',5,'inCart'),(124,37,'Chocolate','Rasberry',4,'inCart'),(125,38,'Chocolate','Crispy',7,'inCart');
 /*!40000 ALTER TABLE `orderdetails` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -132,13 +133,14 @@ DROP TABLE IF EXISTS `orders`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `orders` (
   `orderID` int NOT NULL AUTO_INCREMENT,
-  `e-mail` varchar(45) DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
   `sum` int DEFAULT NULL,
+  `status` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`orderID`),
   UNIQUE KEY `orderID_UNIQUE` (`orderID`),
-  KEY `e-mail_idx` (`e-mail`),
-  CONSTRAINT `e-mail` FOREIGN KEY (`e-mail`) REFERENCES `customers` (`e-mail`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `e-mail_idx` (`email`),
+  CONSTRAINT `e-mail` FOREIGN KEY (`email`) REFERENCES `customers` (`e-mail`)
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -147,6 +149,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
+INSERT INTO `orders` VALUES (35,'tmp@mail',85,'inCart'),(36,'tmp@mail',31,'inCart'),(37,'tmp@mail',100,'inCart'),(38,'tmp@mail',77,'inCart');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -182,4 +185,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-14  9:51:47
+-- Dump completed on 2020-03-16 20:25:07
