@@ -15,6 +15,7 @@ import java.sql.Statement;
  */
 public class UserMapper {
 
+    //creating a user and inserting data into the database
     public static void createUser( User user ) throws LoginSampleException {
         try {
             Connection con = Connector.connection();
@@ -33,6 +34,7 @@ public class UserMapper {
         }
     }
 
+    //checking if a user exists by getting data from the database
     public static User login( String email, String password ) throws LoginSampleException {
         try {
             Connection con = Connector.connection();
@@ -49,7 +51,7 @@ public class UserMapper {
                 user.setId( id );
                 return user;
             } else {
-                throw new LoginSampleException( "Could not validate user" );
+                throw new LoginSampleException( "Opret en bruger for at logge ind!" );
             }
         } catch ( ClassNotFoundException | SQLException ex ) {
             throw new LoginSampleException(ex.getMessage());

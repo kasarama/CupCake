@@ -18,27 +18,31 @@
 <body>
 
 <td>
-    <form name="createUser" action="FrontController" method="POST">
+    <form name="register" action="FrontController" method="POST">
         <input type="hidden" name="taget" value="register">
         Email:<br>
         <input type="text" name="email" value="someone@olskercupcakes.com">
+        ${requestScope.email}
         <br>
         Password:<br>
-        <input type="password" name="password1" value="sesam">
+        <input type="password" name="Indtast Kodeord" value="sesam">
+        ${requestScope.password1}
         <br>
         Retype Password:<br>
-        <input type="password" name="password2" value="sesam">
+        <input type="password" name="Indtast Kodeord igen" value="sesam">
+        ${requestScope.password2}
         <br>
-        <input type="submit" value="Submit">
+        <input type="submit" value="Opret bruger">
     </form>
 </td>
 
-
+//TODO: Error on register page if user exists. ex: "bruger eksistere, contact IT?"
 <c:if test = "${requestScope.error!= null}" >
 
     <h2>Error ! </h2>
     ${requestScope.error}
 
 </c:if>
+
 </body>
 </html>

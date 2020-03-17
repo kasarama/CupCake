@@ -1,68 +1,48 @@
-<%-- 
-    Document   : index
-    Created on : Aug 22, 2017, 2:01:06 PM
-    Author     : kasper
+<%--
+  Created by IntelliJ IDEA.
+  User: monajakobmeshal
+  Date: 3/17/20
+  Time: 18:30
+  To change this template use File | Settings | File Templates.
 --%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@include file="includes/header.inc"%>
-
-
-<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Welcome page</title>
-    </head>
-    <body>
-        <h1>Velkommen ombord!</h1>
-        <h2>Log in hvis du allerede er en bruger.</h2>
+<head>
+    <!-- This is the title that'll be displayed in the browser window "tab" -->
+    <title>Login page</title>
+</head>
 
-        <table>
-            <tr><td></td>
-                <td>
-                    <form name="login" action="FrontController" method="POST">
-                        <input type="hidden" name="taget" value="login">
-                        Email:<br>
-                        <input type="text" name="email" value="someone@olskercupcakes.com">
-                        <br>
-                        Password:<br>
-                        <input type="password" name="password" value="sesam">
-                        <br>
-                        <input type="submit" value="Submit">
-                    </form>
-                </td>
-                <td>Or Register</td>
-                <td>
-                    <form name="register" action="FrontController" method="POST">
-                        <input type="hidden" name="taget" value="register">
-                        Email:<br>
-                        <input type="text" name="email" value="someone@olskercupcakes.com">
-                        <br>
-                        Password:<br>
-                        <input type="password" name="password1" value="sesam">
-                        <br>
-                        Retype Password:<br>
-                        <input type="password" name="password2" value="sesam">
-                        <br>
-                        <input type="submit" value="Submit">
-                    </form>
-                </td>
-            </tr>
-        </table>
-<%--        Bare lige se I har en ide om hvad vi forslå I ikke gør ! det hedder scpript lets --%>
-<%--        <% String error = (String) request.getAttribute( "error");--%>
-<%--           if ( error != null) { --%>
-<%--               out.println("<H2>Error!!</h2>");--%>
-<%--               out.println(error);--%>
-<%--           }--%>
-<%--        %>--%>
+<body>
+<h1>Velkommen ombord!</h1>
+<h4>Log in hvis du allerede er en bruger.</h4>
 
-        <c:if test = "${requestScope.error!= null}" >
+<br>
+<!--This sessionScope works with the Login
+ session: communication session between a browser and the server.
+ print out the requested message, "as long as the session lives"-->
+${sessionScope.message}
+<!--This requestScope works with the Login class
+ print out the requested message, "as long as the requestScope lives"-->
+${requestScope.message}
+<br>
 
-           <h2>Error ! </h2>
-            ${requestScope.error}
+<!-- ** Creating new user field and button ** -->
+<!-- action: do action on this server, method: do the action using this method from the server file -->
+<!-- action: the data/text to be posted/gotten by server to browser -->
+<form name="login" action="FrontController" method="POST">
+    <input type="hidden" name="taget" value="login">
+    <label for="fname">Email:</label><br>
+    <input type="text" id="fname" name="email"><br>
+    <label for="lname">Kodeord:</label><br>
+    <input type="password" id="lname" name="password" value="sesam"> <br><br>
+    <input type="submit" value="Login">
+</form>
 
-        </c:if>
-    </body>
+<c:if test = "${requestScope.error!= null}" >
+
+    <h4>Der gik noget galt!</h4>
+    ${requestScope.error}
+</c:if>
+
+</body>
 </html>

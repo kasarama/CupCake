@@ -33,6 +33,7 @@ public class FrontController extends HttpServlet {
             throws ServletException, IOException {
         try {
             Command action = Command.from( request );
+            //view = the jsp pages
             String view = action.execute( request, response );
             if (view.equals("index")){
                 request.getRequestDispatcher(  view + ".jsp" ).forward( request, response );
