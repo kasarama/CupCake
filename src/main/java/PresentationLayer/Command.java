@@ -18,6 +18,8 @@ abstract class Command {
         commands.put( "confirmOrder", new ConfirmOrder() );
         commands.put( "saveOrder", new SaveOrder() );
         commands.put( "deleteItem", new DeleteOrderLine() );
+        commands.put( "pay", new Pay() );
+        commands.put( "redirect", new Redirect() );
     }
 
     static Command from( HttpServletRequest request ) {

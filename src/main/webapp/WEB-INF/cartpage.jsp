@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: magda
@@ -6,6 +5,7 @@
   Time: 21:45
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -49,14 +49,23 @@
             <input type="submit" value="Bestil" >
         </form>
         </th>
+
         <th>
             <form name="saveOrder" action="FrontController" method="POST">
                 <input type="hidden" name="taget" value="saveOrder">
                 <input type="submit" value="Gem" onclick="msgSaved()">
             </form>
         </th>
+
+        <th>
+            <a href="FrontController?taget=redirect&destination=index"><button type="button">Tilføj flere</button></a>
+        </th>
     </tr>
 </table>
+
+${requestScope.saldoToLow}
+
+
 
 <script>
     function msgSaved() {

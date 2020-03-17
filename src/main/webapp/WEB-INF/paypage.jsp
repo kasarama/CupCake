@@ -11,7 +11,8 @@
     <title>Betaling</title>
 </head>
 <body>
-<h1>Here is order confirmation and payment</h1>
+<h1>Tak fordi at du handlede hos os!</h1>
+<h2>Din ny saldo er ${requestScope.saldo}</h2>
 
 
 

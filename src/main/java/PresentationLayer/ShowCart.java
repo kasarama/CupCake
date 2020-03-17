@@ -1,5 +1,6 @@
 package PresentationLayer;
 
+import DBAccess.CustomerMapper;
 import FunctionLayer.Cupcake;
 import FunctionLayer.LoginSampleException;
 import FunctionLayer.Order;
@@ -15,6 +16,8 @@ public class ShowCart extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
 
+        String email="tmp@mail"; //todo !get email of logged ind customer!
+        int saldo= CustomerMapper.saldo(email);
         Order order = OrderLines.getOrder();
         ArrayList<String[]> cartLines = new ArrayList<>();
 
@@ -26,8 +29,19 @@ public class ShowCart extends Command {
             line[3] = String.valueOf(order.getProducts().get(c));
             cartLines.add(line);
         }
+
+        String saldoMSG ="";
+        if((saldo-order.getSum())<0){
+             saldoMSG = "Du har ikke nok penge på din konto. Kontak butikken for TOP-UP";
+
+            }
+        
+
         request.setAttribute("items", cartLines);
         request.setAttribute("sum", order.getSum());
+        request.setAttribute("saldo", saldo);
+        request.setAttribute("saldoToLow", saldoMSG );
+
 
 
         return "cartpage";

@@ -42,5 +42,4 @@ public class OrderMapper {
             throw new LoginSampleException(ex.getMessage());
         }
     }
-
 }
