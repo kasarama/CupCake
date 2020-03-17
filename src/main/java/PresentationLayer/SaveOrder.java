@@ -15,7 +15,9 @@ public class SaveOrder extends Command {
         //todo when we know which e-mail is logged in, we will change "tmp@mail" to that e-mail
 
         Order order = OrderLines.getOrder();
-                OrderMapper.newOrder("tmp@mail", order, "inCart");
+        OrderMapper.newOrder("tmp@mail", order, "inCart");
+        order.getProducts().clear();
+        order.setSum(0);
 
         request.setAttribute("msg", "Din ordre er nu gemt i din kurv og du kan fortsætte med den når du vil");
         return "index";

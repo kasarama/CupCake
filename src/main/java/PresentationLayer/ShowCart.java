@@ -14,6 +14,7 @@ public class ShowCart extends Command {
     //todo save each cupcake and its quantity in an array, add each array to the list and set as an attribute on request
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
+
         Order order = OrderLines.getOrder();
         ArrayList<String[]> cartLines = new ArrayList<>();
 
@@ -27,6 +28,7 @@ public class ShowCart extends Command {
         }
         request.setAttribute("items", cartLines);
         request.setAttribute("sum", order.getSum());
+
 
         return "cartpage";
     }
