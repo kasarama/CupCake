@@ -91,6 +91,9 @@ ${requestScope.payStatus}
     function removeItem() {
         alert("Cupcake slettet fra indkøbskurven")
     }
+    function fill() {
+        alert("Dine gemte Cupcakes er nu i din indkæbskurv")
+    }
 
 
 </script>

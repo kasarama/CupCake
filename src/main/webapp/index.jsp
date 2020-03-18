@@ -74,6 +74,10 @@
     <input type="submit" value="Læg i kurv" >
 </form>
 
+<form name="showOrders" action="FrontController" method="POST">
+    <input type="hidden" name="taget" value="showOrders">
+    <input type="submit" value="Vis oversigt over mine ordrer">
+</form>
 
 ${sessionScope.msg}
 

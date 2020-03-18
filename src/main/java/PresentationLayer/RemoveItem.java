@@ -25,7 +25,7 @@ public class RemoveItem extends Command {
         order.setSum(order.getSum()-cupcakeTotalPrice);
         int saldo= CustomerMapper.saldo(email);
         order = OrderLines.getOrder();
-        ArrayList<String[]> cartLines = HelpClass.orderTable(email, order);
+        ArrayList<String[]> cartLines = HelpClass.orderTable(order);
         request.setAttribute("items", cartLines);
         request.setAttribute("sum", order.getSum());
         request.setAttribute("saldo", saldo);

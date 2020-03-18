@@ -1,7 +1,6 @@
 package PresentationLayer;
 
 import DBAccess.CustomerMapper;
-import FunctionLayer.Cupcake;
 import FunctionLayer.LoginSampleException;
 import FunctionLayer.Order;
 import FunctionLayer.OrderLines;
@@ -21,7 +20,7 @@ public class ConfirmOrder extends Command {
         String email="tmp@mail";
         int saldo= CustomerMapper.saldo(email);
         Order order = OrderLines.getOrder();
-        ArrayList<String[]> cartLines = HelpClass.orderTable(email, order);
+        ArrayList<String[]> cartLines = HelpClass.orderTable(order);
         int difference=saldo-order.getSum();
 
         request.setAttribute("items", cartLines);

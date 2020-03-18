@@ -21,9 +21,8 @@ public class HelpClass {
 
          */
     }
-    public static ArrayList<String[]> orderTable(String email, Order order) throws LoginSampleException {
+    public static ArrayList<String[]> orderTable(Order order) throws LoginSampleException {
         ArrayList<String[]> table = new ArrayList<>();
-        int saldo= CustomerMapper.saldo(email);
         for (Cupcake c: order.getProducts().keySet()) {
             String[] line = new String[4];
             line[0] = c.getBottom();

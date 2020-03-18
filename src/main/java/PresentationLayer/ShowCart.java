@@ -14,10 +14,11 @@ public class ShowCart extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
 
+
         String email="tmp@mail"; //todo !get email of logged ind customer!
         int saldo= CustomerMapper.saldo(email);
         Order order = OrderLines.getOrder();
-        ArrayList<String[]> cartLines = HelpClass.orderTable(email, order);
+        ArrayList<String[]> cartLines = HelpClass.orderTable(order);
 
         request.setAttribute("items", cartLines);
         request.setAttribute("sum", order.getSum());
