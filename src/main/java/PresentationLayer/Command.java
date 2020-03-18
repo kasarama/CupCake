@@ -17,7 +17,7 @@ abstract class Command {
         commands.put( "showCart", new ShowCart() );
         commands.put( "confirmOrder", new ConfirmOrder() );
         commands.put( "saveOrder", new SaveOrder() );
-        commands.put( "deleteItem", new DeleteOrderLine() );
+        commands.put( "removeItem", new RemoveItem() );
         commands.put( "pay", new Pay() );
         commands.put( "redirect", new Redirect() );
     }

@@ -5,6 +5,7 @@ import FunctionLayer.Cupcake;
 import FunctionLayer.LoginSampleException;
 import FunctionLayer.Order;
 import FunctionLayer.OrderLines;
+import Util.HelpClass;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,21 +21,24 @@ public class ConfirmOrder extends Command {
         String email="tmp@mail";
         int saldo= CustomerMapper.saldo(email);
         Order order = OrderLines.getOrder();
-        ArrayList<String[]> cartLines = new ArrayList<>();
+        ArrayList<String[]> cartLines = HelpClass.orderTable(email, order);
+        int difference=saldo-order.getSum();
 
-        for (Cupcake c: order.getProducts().keySet()) {
-            String[] line = new String[4];
-            line[0] = c.getBottom();
-            line[1] = c.getTopping();
-            line[2] = String.valueOf(c.getPrice());
-            line[3] = String.valueOf(order.getProducts().get(c));
-            cartLines.add(line);
-        }
         request.setAttribute("items", cartLines);
         request.setAttribute("sum", order.getSum());
         request.setAttribute("saldo", saldo);
+        if (difference<0){
+            request.setAttribute("payStatus","Du har dæsvære ikke nok penge på din konto. " +
+                    "Slet nogle af Cupcakes fra din indkøbskurv, gem ordre for at bestile senere eller slet den ");
+            return "cartpage";
+        }else{
+            request.setAttribute("payStatus",  "Tak for din bestiling! Klik for at se kvittering");
+            return "confirmpage";
+        }
 
 
-        return "confirmpage";
+
+
+
     }
 }

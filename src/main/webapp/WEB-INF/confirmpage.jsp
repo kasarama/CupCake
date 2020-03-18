@@ -44,8 +44,11 @@
 
 
     <tr>
-        <th>
-           <a href="FrontController?taget=redirect&destination=cartpage"><button type="button">Tilbage</button></a>
+        <th><form name="showCart" action="FrontController" method="POST">
+            <input type="hidden" name="taget" value="showCart">
+            <input type="submit" value="Tilbage til indkøbskurv">
+        </form>
+
         </th>
         <th>
             <form name="pay" action="FrontController" method="POST">

@@ -1,1 +1,16 @@
 session id in DB is used to controll orderlines(orderdetiails) of each user using the system.
+
+
+    <form name="removeItem" action="FrontController" method="POST">
+        <input type="hidden" name="taget" value="removeItem">
+<c:forEach var="item" items="${requestScope.items}">
+    <tr>
+            <c:forEach var="detail" items="${item}">
+                <th><input type="text" name="comoponents"value="${detail}"></th>
+            </c:forEach>
+        <th><input type="submit" value="Slet " onclick="removItem()" ></th>
+
+    </tr>
+</c:forEach>
+    </form>
+

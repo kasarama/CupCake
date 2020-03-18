@@ -17,7 +17,6 @@
 <h3>Her kan du se en oversigt af kurvens indhold:</h3>
 
 
-
 <table>
     <tr>
         <th>Bund</th>
@@ -26,14 +25,26 @@
         <th>Antal</th>
     </tr>
 
-<c:forEach var="item" items="${requestScope.items}">
-    <tr>
-            <c:forEach var="detail" items="${item}">
-                <th>${detail}</th>
-            </c:forEach>
 
-    </tr>
-</c:forEach>
+
+    <c:forEach var="item" items="${requestScope.items}">
+        <tr>
+            <form name="removeItem" action="FrontController" method="POST">
+                <input type="hidden" name="taget" value="removeItem">
+                <input type="hidden" name="bottom" value="${item[0]}">
+                <input type="hidden" name="topping" value="${item[1]}">
+                    <th>${item[0]}</th>
+                    <th>${item[1]}</th>
+                    <th>${item[2]}</th>
+                    <th>${item[3]}</th>
+                    <th><input type="submit" value="Slet " onclick="removItem()" ></th>
+
+            </form>
+        </tr>
+    </c:forEach>
+
+
+
     <tr>
         <th>I alt:</th>
         <th></th>
@@ -46,7 +57,7 @@
         <th>
         <form name="confirmOrder" action="FrontController" method="POST">
             <input type="hidden" name="taget" value="confirmOrder">
-            <input type="submit" value="Bestil" >
+            <input type="submit" value="Bestil" onclick="payStatus()" >
         </form>
         </th>
 
@@ -63,7 +74,7 @@
     </tr>
 </table>
 
-${requestScope.saldoToLow}
+${requestScope.payStatus}
 
 
 
@@ -71,6 +82,16 @@ ${requestScope.saldoToLow}
     function msgSaved() {
         alert("Du kan fortsætte med din ordre når du er tilbage")
     }
+
+    function payStatus() {
+        var msg = "${requestScope.payStatus}"
+        alert(msg)
+    }
+
+    function removeItem() {
+        alert("Cupcake slettet fra indkøbskurven")
+    }
+
 
 </script>
 </body>

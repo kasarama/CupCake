@@ -14,7 +14,7 @@
 <h1>Tak fordi at du handlede hos os!</h1>
 <h2>Din ny saldo er ${requestScope.saldo}</h2>
 
-
+<a href="FrontController?taget=redirect&destination=index">Til forsiden</a>
 
 </body>
 </html>

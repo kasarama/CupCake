@@ -16,7 +16,6 @@ public class NewOrderLine extends Command {
         String bottom = request.getParameter( "bottom" );
         String topping = request.getParameter( "topping" );
         int quantity = Integer.parseInt(request.getParameter("quantity"));
-        String session = request.getSession().getId();
         Order order = OrderLines.getOrder();
         Cupcake cupcake = new Cupcake(bottom, topping);
         cupcake.setPrice(cupcake.price());
