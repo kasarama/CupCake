@@ -14,19 +14,10 @@ public class LogicFacade {
         return UserMapper.login( email, password );
     } 
 
-    public static User createUser( String email, String password ) throws LoginSampleException {
-        User user = new User(email, password, "customer");
+    public static User createUser( String email, String password, String fName, String sName ) throws LoginSampleException {
+        User user = new User(email, password, fName, sName);
         UserMapper.createUser( user );
         return user;
     }
-
-
-    public static void showCart (){
-        //todo prints all order lines on cartpage with sum of order and "slet" button at each line
-
-
-    }
-
-
 
 }

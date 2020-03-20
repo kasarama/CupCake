@@ -1,16 +1,4 @@
-session id in DB is used to controll orderlines(orderdetiails) of each user using the system.
-
-
-    <form name="removeItem" action="FrontController" method="POST">
-        <input type="hidden" name="taget" value="removeItem">
-<c:forEach var="item" items="${requestScope.items}">
-    <tr>
-            <c:forEach var="detail" items="${item}">
-                <th><input type="text" name="comoponents"value="${detail}"></th>
-            </c:forEach>
-        <th><input type="submit" value="Slet " onclick="removItem()" ></th>
-
-    </tr>
-</c:forEach>
-    </form>
-
+todo loginpage - remove login button from nav, add link to index
+maybe it was a good ide to put email as an atribute of order object? one order can be made only by one user - it would be easier to read data from db
+todo Chceck if yu can order an ampty order!!!
+todo Find sql exeptions - where and way I get input on idex and what to do with it??

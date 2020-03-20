@@ -1,14 +1,32 @@
 package FunctionLayer;
 
-public class Customer {
-    String email;
-    String password;
-    String role;
+import java.util.ArrayList;
 
-    public Customer(String email, String password, String role) {
+public class Customer {
+    private String email;
+    private String firstName;
+    private String lastName;
+    private ArrayList<Order> orders;
+    private int saldo;
+
+    public Customer(String email) {
         this.email = email;
-        this.password = password;
-        this.role = role;
+        this.orders = new ArrayList<>();
+        this.firstName=firstName;
+        this.lastName=lastName;
+        this.saldo=saldo;
+    }
+
+    public void add(Order order){
+        orders.add(order);
+    }
+
+    public ArrayList<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(ArrayList<Order> orders) {
+        this.orders = orders;
     }
 
     public String getEmail() {
@@ -19,19 +37,27 @@ public class Customer {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getRole() {
-        return role;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public int getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(int saldo) {
+        this.saldo = saldo;
     }
 }

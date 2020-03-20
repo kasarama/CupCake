@@ -1,5 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: magda
@@ -7,20 +5,15 @@
   Time: 14:06
   To change this template use File | Settings | File Templates.
 --%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>OrdrerOversigt</title>
-</head>
-<body>
-     Here comes list of all the orders of a customer
+<%@include file="../includes/header.inc"%>
 
+        order oversigt
 
-
-
-<c:forEach var="order" items="${requestScope.orders}">
-    <div>
-        <table>
+<c:forEach var="order" items="${requestScope.ordersArray}">
+    <div class="container">
+        <table class="table table-sm">
             <tr>
                 <th>Ordre nr: ${order.id}</th>
                 <th>Bund</th>
@@ -28,12 +21,12 @@
                 <th>Antal</th>
             </tr>
 
-            <c:forEach var="ciastko" items="${order.products}">
+            <c:forEach var="cupcake" items="${order.products}">
                 <tr>
                     <th></th>
-                    <th>${ciastko.key.bottom}</th>
-                    <th>${ciastko.key.topping}</th>
-                    <th>${ciastko.value}</th>
+                    <th>${cupcake.key.bottom}</th>
+                    <th>${cupcake.key.topping}</th>
+                    <th>${cupcake.value}</th>
                 </tr>
             </c:forEach>
 

@@ -14,13 +14,14 @@ public class Pay extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
         //todo displays error if saldo to low or adds order to DB as paid, and updates saldo
-        String email="tmp@mail"; //todo change to email of logged in customer!
+        String email=request.getSession().getAttribute("email").toString();
         int saldo = CustomerMapper.saldo(email);
 
         Order order = OrderLines.getOrder();
         OrderMapper.newOrder(email, order, "Paid");
         CustomerMapper.updateSaldo(email, order.getSum());
         saldo = CustomerMapper.saldo(email);
+        order.clear();
 
 
         request.setAttribute("saldo", saldo);

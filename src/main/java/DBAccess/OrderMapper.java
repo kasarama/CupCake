@@ -17,7 +17,7 @@ public class OrderMapper {
         int orderID=0;
         try{
             Connection con = Connector.connection();
-            String sqlSaveOrder = "Insert into orders (email, sum, status) values ('"+email+ "', "+order.getSum()+", '"+status+"')";
+            String sqlSaveOrder = "Insert into orders (email, sum) values ('"+email+ "', "+order.getSum()+")";
             PreparedStatement ps = con.prepareStatement(sqlSaveOrder);
             ps.executeUpdate(sqlSaveOrder);
 
@@ -68,62 +68,6 @@ public class OrderMapper {
         }
         return number;
     }
-
-
-    public static Order[] listaZamowien(String email) throws LoginSampleException {
-        Order[]orderList= new Order[numberOfOrders(email)];
-        try{
-            Connection con = Connector.connection();
-            String sql="SELECT orders.orderID, orderdetails.bottom, orderdetails.topping, orderdetails.quantity\n" +
-                    "FROM orders\n" +
-                    "INNER JOIN orderdetails ON orders.orderID=orderdetails.orderID where email='"+email+"' order by orderID;";
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps = con.prepareStatement(sql);
-            ResultSet resultSet = ps.executeQuery();
-            while (resultSet.next()){
-                int orderID = resultSet.getInt("orderID");
-                String bottom = resultSet.getString("bottom");
-                String topping = resultSet.getString("topping");
-                int quantity = resultSet.getInt("quantity");
-                Order order = new Order();
-                Cupcake cupcake= new Cupcake(bottom, topping);
-                cupcake.setPrice(cupcake.price());
-
-                if(orderList[0]==null){
-                    orderList[0]=order;
-                    orderList[0].setSum(orderList[0].sum());
-                    orderList[0].setId(orderID);
-                    System.out.println("dodano pierwsze zamowienie o ID "+ orderList[0].getId());
-                } else for (int i = 0; i < orderList.length; i++) {
-                    if (orderList[i]!=null && orderList[i].getId()==orderID){
-                        orderList[i].addCupcake(cupcake, quantity);
-                        orderList[i].setSum(orderList[i].sum());
-                        System.out.println("dodano cupcake do zamowienia znajdujacego sie na tablicy o ID: " +orderList[i].getId()+". Suma zamowienia wynosi: "+ orderList[i].getSum());
-                    } else for ( i = 0; i < orderList.length; i++)
-                        if (orderList[i] == null) {
-
-                            orderList[i] = order;
-                            orderList[i].setId(orderID);
-                            orderList[i].setSum(orderList[i].sum());
-
-                        }
-
-                }
-            }
-            for (int i=0; i<orderList.length; i++){
-                System.out.println(orderList[i].getId());
-            }
-        } catch(SQLException |
-                ClassNotFoundException ex )
-
-        {
-            throw new LoginSampleException(ex.getMessage());
-        }
-
-        return orderList;
-    }
-
-
     public static Order[] ListOfOrders(String email) throws LoginSampleException {
         Order[]orderList= new Order[numberOfOrders(email)];
         try{
@@ -171,12 +115,28 @@ public class OrderMapper {
                     int quantity = resultSet.getInt("quantity");
                     Cupcake cupcake = new Cupcake(bottom, topping);
                     orderList[i].addCupcake(cupcake, quantity);
+                    orderList[i].setSum(orderList[i].sum());
                 }
             } catch (SQLException |
                     ClassNotFoundException ex) {
                 throw new LoginSampleException(ex.getMessage());
             }
         }return orderList;
+    }
+
+    public static void sendOrderToArch(String comment, int orderID) throws LoginSampleException {
+
+            try {
+                Connection con = Connector.connection();
+                String sql = "update orders set comment='"+comment+"' where orderID="+orderID;
+                PreparedStatement ps = con.prepareStatement(sql);
+                ps.executeUpdate(sql);
+            } catch (SQLException |
+                    ClassNotFoundException ex) {
+                throw new LoginSampleException(ex.getMessage());
+            }
+
+
     }
 
 

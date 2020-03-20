@@ -19,17 +19,18 @@ public class ShowOrders extends Command {
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
         /*
         todo read orders of given customer from database and pack them in one object to be reade on orderspage.jsp
-        todo #2
-         */
+        */
 
-        String email="tmp@mail"; //todo !get email of logged ind customer!
+        String email=request.getSession().getAttribute("email").toString();
         int saldo= CustomerMapper.saldo(email);
 
-        Order[] emptyOrders = OrderMapper.ListOfOrders(email);
         Order[] orders = OrderMapper.ListOfOrdersWithCupcakes(email);
 
+        Order order = OrderLines.getOrder();
+        int items= order.items();
+        request.setAttribute("cart", items);
         request.setAttribute("saldo", saldo);
-        request.setAttribute("orders", orders);
+        request.setAttribute("ordersArray", orders);
 
 
 

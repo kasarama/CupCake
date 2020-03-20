@@ -13,6 +13,7 @@ public class NewOrderLine extends Command {
     // count sum of order, count number of Cupcakes in cart
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
+
         String bottom = request.getParameter( "bottom" );
         String topping = request.getParameter( "topping" );
         int quantity = Integer.parseInt(request.getParameter("quantity"));
