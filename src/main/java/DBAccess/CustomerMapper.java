@@ -18,7 +18,7 @@ public class CustomerMapper {
     public static void createCustomer( Customer customer, String password ) throws LoginSampleException, SQLException {
         try {
             Connection con = Connector.connection();
-            String SQL = "INSERT INTO users (email, password, firstName, lastName) VALUES (?, ?, ?, ?)";
+            String SQL = "INSERT INTO users (email, password, firstName, lastName, saldo) VALUES (?, ?, ?, ?, 0)";
             PreparedStatement ps = con.prepareStatement( SQL, Statement.RETURN_GENERATED_KEYS );
             ps.setString( 1, customer.getEmail() );
             ps.setString( 2, password);
@@ -107,12 +107,14 @@ public class CustomerMapper {
 
         } catch(SQLException |
                 ClassNotFoundException ex ) {
+            ex.printStackTrace();
             throw new LoginSampleException(ex.getMessage());
         }
             if (affectedRows!=0){
                 updated=true;
-                return updated;
+
             }
+        System.out.println("It is " + updated +", that saldo has been updated");
             return updated;
     }
 

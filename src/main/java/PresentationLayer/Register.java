@@ -34,8 +34,8 @@ public class Register extends Command {
 
                    session.setAttribute("email", email);
                    session.setAttribute("user", customer);
-                   session.setAttribute("fName", customer.getFirstName());
-                   session.setAttribute("sName", customer.getLastName());
+                   session.setAttribute("firstName", customer.getFirstName());
+
                    page = "customerpage";
                }catch (SQLException ex){
                    registerMSG="Email findes allerede i vores database. Prøv igen eller log ind";
@@ -57,6 +57,7 @@ public class Register extends Command {
                 registerMSG="System fejl nr 666. Kontak vnligst butikken: (tlf) 81819292";
             }
         request.setAttribute("registerMSG", registerMSG);
+
         Order order = OrderLines.getOrder();
         int items= order.items();
         request.setAttribute("cart", items);
