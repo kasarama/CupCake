@@ -1,16 +1,11 @@
-session id in DB is used to controll orderlines(orderdetiails) of each user using the system.
+todo make tabel on cartpage same as on other pages
 
 
-    <form name="removeItem" action="FrontController" method="POST">
-        <input type="hidden" name="taget" value="removeItem">
-<c:forEach var="item" items="${requestScope.items}">
-    <tr>
-            <c:forEach var="detail" items="${item}">
-                <th><input type="text" name="comoponents"value="${detail}"></th>
-            </c:forEach>
-        <th><input type="submit" value="Slet " onclick="removItem()" ></th>
+todo check admins data - change methods where : "not where mail=admin"
+todo do not display order table for those of customers that do not have orders
+todo iniitilialize an cart-order for each session , not general
+todo display msg if list of orders of cutomer is empty insteat of a tabel
+todo saldo for ukend email???
+todo przekierowanie na login albo index jesli nie jest dministratorem lub jesli jest administratorem - så ingen rammer den side man oikke har adgang til
 
-    </tr>
-</c:forEach>
-    </form>
 

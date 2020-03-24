@@ -1,26 +1,24 @@
 package PresentationLayer;
 
-import DBAccess.OrderMapper;
 import FunctionLayer.LoginSampleException;
 import FunctionLayer.Order;
 import FunctionLayer.OrderLines;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-//Magdalena
-public class SaveOrder extends Command {
+public class LogOut extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
-        //todo when we know which e-mail is logged in, we will change "tmp@mail" to that e-mail
+        HttpSession session = request.getSession();
 
         Order order = OrderLines.getOrder();
-        OrderMapper.newOrder("tmp@mail", order, "inCart");
-        order.getProducts().clear();
-        order.setSum(0);
-
-        request.setAttribute("msg", "Din ordre er nu gemt i din kurv og du kan fortsætte med den når du vil");
+        order.clear();
+        int items= order.items();
+        request.setAttribute("cart", items);
+        session.setAttribute( "user", null );
+        session.setAttribute("email", null);
         return "index";
-
     }
 }

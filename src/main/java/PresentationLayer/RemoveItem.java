@@ -14,7 +14,6 @@ import java.util.ArrayList;
 public class RemoveItem extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
-        String email="tmp@mail"; // todo change to email of loged in customer
         String bottom = request.getParameter("bottom");
         String topping = request.getParameter("topping");
         Order order = OrderLines.getOrder();
@@ -23,12 +22,22 @@ public class RemoveItem extends Command {
 
         order.getProducts().remove(cupcake);
         order.setSum(order.getSum()-cupcakeTotalPrice);
-        int saldo= CustomerMapper.saldo(email);
         order = OrderLines.getOrder();
         ArrayList<String[]> cartLines = HelpClass.orderTable(order);
         request.setAttribute("items", cartLines);
         request.setAttribute("sum", order.getSum());
-        request.setAttribute("saldo", saldo);
+
+        if(request.getSession().getAttribute("email") != null){
+
+            String email=request.getSession().getAttribute("email").toString();
+            int saldo= CustomerMapper.saldo(email);
+            request.setAttribute("saldo", saldo);
+        } else
+            request.setAttribute("saldo", null);
+
+        int items= order.items();
+        request.setAttribute("cart", items);
+
 
         return "cartpage";
     }

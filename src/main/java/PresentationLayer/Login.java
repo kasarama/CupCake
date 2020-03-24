@@ -1,8 +1,7 @@
 package PresentationLayer;
 
-import FunctionLayer.LogicFacade;
-import FunctionLayer.LoginSampleException;
-import FunctionLayer.User;
+import FunctionLayer.*;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -15,19 +14,48 @@ import javax.servlet.http.HttpSession;
 public class Login extends Command {
 
     @Override
-    String execute( HttpServletRequest request, HttpServletResponse response ) throws LoginSampleException {
+    String execute( HttpServletRequest request, HttpServletResponse response )  {
         String email = request.getParameter( "email" );
         String password = request.getParameter( "password" );
-        User user = LogicFacade.login( email, password );
+        String error="";
+        String page="index";
+        String firstName="";
 
-        HttpSession session = request.getSession();
-
-        session.setAttribute( "user", user );
-        session.setAttribute( "role", user.getRole() );
-        session.setAttribute("email", email);  // ellers skal man skrive  user.email på jsp siderne og det er sgu lidt mærkeligt at man har adgang til private felter. Men måske er det meget fedt , jeg ved det ikke
+        try {
 
 
-        return user.getRole() + "page";
+            User user = LogicFacade.login(email, password);
+
+
+            if (request.getParameter("origin") != null) {
+                page = request.getParameter("origin");
+            }
+
+            if (email.equals("admin@olsker.cupcakes")) {
+                page = "adminpage";
+            }
+
+            if (user.getEmail().equals("error")) {
+                error = "Jeg kan ikke genkende dig. Prøv venligst igen eller register dig som ny Kunde";
+                page="loginpage";
+            } else {
+
+                HttpSession session = request.getSession();
+                firstName=user.getfName();
+                session.setAttribute("user", user);
+                session.setAttribute("email", email);  // ellers skal man skrive  user.email på jsp siderne og det er sgu lidt mærkeligt at man har adgang til private felter. Men måske er det meget fedt , jeg ved det ikke
+                session.setAttribute("firstName", firstName);  // ellers skal man skrive  user.email på jsp siderne og det er sgu lidt mærkeligt at man har adgang til private felter. Men måske er det meget fedt , jeg ved det ikke
+
+            }
+        }catch (LoginSampleException ex){
+            error="Systemfejl nr 666. Kontak butiken - tel: 81819292";
+        }
+        request.setAttribute("errorMSG", error);
+        Order order = OrderLines.getOrder();
+        int items= order.items();
+        request.setAttribute("cart", items);
+
+        return page;
     }
 
 }

@@ -9,6 +9,7 @@ import Util.HelpClass;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,20 +17,21 @@ import java.util.Map;
 //Magdalena
 public class ShowOrders extends Command {
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException, SQLException {
         /*
         todo read orders of given customer from database and pack them in one object to be reade on orderspage.jsp
-        todo #2
-         */
+        */
 
-        String email="tmp@mail"; //todo !get email of logged ind customer!
+        String email=request.getSession().getAttribute("email").toString();
         int saldo= CustomerMapper.saldo(email);
 
-        Order[] emptyOrders = OrderMapper.ListOfOrders(email);
         Order[] orders = OrderMapper.ListOfOrdersWithCupcakes(email);
 
+        Order order = OrderLines.getOrder();
+        int items= order.items();
+        request.setAttribute("cart", items);
         request.setAttribute("saldo", saldo);
-        request.setAttribute("orders", orders);
+        request.setAttribute("ordersArray", orders);
 
 
 

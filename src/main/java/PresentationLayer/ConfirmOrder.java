@@ -14,28 +14,29 @@ import java.util.ArrayList;
 public class ConfirmOrder extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
-    // todo !CHANGE EMAIL TO EMAIL OF LOGGED IN CUSTOMER!
         //  todo show saldo of logged in customer, show order lines,
         //   show saldo after paying, show msg about saldo if low/to low
-        String email="tmp@mail";
+        String email=request.getSession().getAttribute("email").toString();
         int saldo= CustomerMapper.saldo(email);
         Order order = OrderLines.getOrder();
         ArrayList<String[]> cartLines = HelpClass.orderTable(order);
-        int difference=saldo-order.getSum();
 
+
+        int items= order.items();
+        request.setAttribute("cart", items);
         request.setAttribute("items", cartLines);
         request.setAttribute("sum", order.getSum());
         request.setAttribute("saldo", saldo);
+
+        int difference=saldo-order.getSum();
+        String page="";
         if (difference<0){
-            request.setAttribute("payStatus","Du har dæsvære ikke nok penge på din konto. " +
-                    "Slet nogle af Cupcakes fra din indkøbskurv, gem ordre for at bestile senere eller slet den ");
-            return "cartpage";
+            page = "cartpage";
         }else{
-            request.setAttribute("payStatus",  "Tak for din bestiling! Klik for at se kvittering");
-            return "confirmpage";
+            page = "confirmpage";
         }
 
-
+        return page;
 
 
 

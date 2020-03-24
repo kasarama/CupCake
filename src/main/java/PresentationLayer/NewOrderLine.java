@@ -1,11 +1,12 @@
 package PresentationLayer;
 
-import DBAccess.OrderMapper;
-import FunctionLayer.*;
+import FunctionLayer.Cupcake;
+import FunctionLayer.LoginSampleException;
+import FunctionLayer.Order;
+import FunctionLayer.OrderLines;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 //Magdalena
 public class NewOrderLine extends Command {
@@ -13,6 +14,7 @@ public class NewOrderLine extends Command {
     // count sum of order, count number of Cupcakes in cart
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
+
         String bottom = request.getParameter( "bottom" );
         String topping = request.getParameter( "topping" );
         int quantity = Integer.parseInt(request.getParameter("quantity"));
@@ -21,6 +23,7 @@ public class NewOrderLine extends Command {
         cupcake.setPrice(cupcake.price());
         order.addCupcake(cupcake,quantity);
         order.setSum(order.sum());
+
         int items= order.items();
         request.setAttribute("cart", items);
         return "index";

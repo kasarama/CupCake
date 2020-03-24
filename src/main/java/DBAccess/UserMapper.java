@@ -15,44 +15,55 @@ import java.sql.Statement;
  */
 public class UserMapper {
 
-    public static void createUser( User user ) throws LoginSampleException {
+    public static void createUser( User user ) throws LoginSampleException, SQLException {
         try {
             Connection con = Connector.connection();
-            String SQL = "INSERT INTO Users (email, password, role) VALUES (?, ?, ?)";
+            String SQL = "INSERT INTO Users (email, password, firstName, lastName) VALUES (?, ?, ?, ?)";
             PreparedStatement ps = con.prepareStatement( SQL, Statement.RETURN_GENERATED_KEYS );
             ps.setString( 1, user.getEmail() );
             ps.setString( 2, user.getPassword() );
-            ps.setString( 3, user.getRole() );
+            ps.setString( 3, user.getfName() );
+            ps.setString( 4, user.getsName() );
+
             ps.executeUpdate();
             ResultSet ids = ps.getGeneratedKeys();
             ids.next();
-            int id = ids.getInt( 1 );
-            user.setId( id );
-        } catch ( SQLException | ClassNotFoundException ex ) {
+
+        } catch ( ClassNotFoundException ex ) {
             throw new LoginSampleException( ex.getMessage() );
+        } catch ( SQLException ex ){
+            throw new SQLException();
+
         }
     }
 
     public static User login( String email, String password ) throws LoginSampleException {
         try {
             Connection con = Connector.connection();
-            String SQL = "SELECT id, role FROM Users "
+            String SQL = "SELECT firstName, lastName FROM Users "
                     + "WHERE email=? AND password=?";
             PreparedStatement ps = con.prepareStatement( SQL );
             ps.setString( 1, email );
             ps.setString( 2, password );
             ResultSet rs = ps.executeQuery();
             if ( rs.next() ) {
-                String role = rs.getString( "role" );
-                int id = rs.getInt( "id" );
-                User user = new User( email, password, role );
-                user.setId( id );
+                String fName = rs.getString( "firstName" );
+                String sName = rs.getString( "lastName" );
+                User user = new User( email, password, fName, sName);
+
                 return user;
             } else {
-                throw new LoginSampleException( "Could not validate user" );
+
+                User user = new User( "error", "error", "", "");
+
+                return user;
+              //  throw new LoginSampleException( "Bruger kunne ikke valideres" );
             }
-        } catch ( ClassNotFoundException | SQLException ex ) {
-            throw new LoginSampleException(ex.getMessage());
+        } catch (  SQLException ex ) {
+            throw new LoginSampleException("Kan ikke forbindes til databasen");
+        } catch ( ClassNotFoundException ex){
+            throw new LoginSampleException("Class not found exc.");
+
         }
     }
 

@@ -7,6 +7,7 @@ public class Order {
     private int id;
     private int sum;
     private HashMap<Cupcake, Integer> products;
+    private String email;
 
 
 
@@ -22,15 +23,12 @@ public class Order {
         }else {products.put(cupcake, quantity);}
     }
 
-    @Override
-    public String toString() {
-String cupcakes="";
-        for (Cupcake c: products.keySet()) {
-            String tmp = cupcakes;
-            cupcakes= tmp + "\n" + c.getBottom() + "-"+c.getTopping()+ "-"+products.get(c);
+    public String getEmail() {
+        return email;
+    }
 
-        }
-        return "Order: "  + cupcakes    ;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public int sum(){
@@ -39,6 +37,12 @@ String cupcakes="";
             sum=sum+(cupcake.getPrice()*getProducts().get(cupcake)); //price of one cupcake multiplied by quantity
             }
         return sum;
+    }
+
+    public void clear(){
+        products.clear();
+        setId(0);
+        setSum(0);
     }
 
     public HashMap<Cupcake, Integer> getProducts() {
@@ -60,6 +64,7 @@ String cupcakes="";
     public void setSum(int sum) {
         this.sum = sum;
     }
+
     public int items() {
         int itemsNumber=0;
         for (Cupcake cupcake: products.keySet()) {
