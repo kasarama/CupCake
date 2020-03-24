@@ -7,14 +7,72 @@ import FunctionLayer.Order;
 import com.sun.org.apache.xpath.internal.operations.Or;
 import com.sun.xml.internal.ws.api.model.wsdl.WSDLPortType;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class CustomerMapper {
+
+
+
+    public static void createCustomer( Customer customer, String password ) throws LoginSampleException, SQLException {
+        try {
+            Connection con = Connector.connection();
+            String SQL = "INSERT INTO users (email, password, firstName, lastName) VALUES (?, ?, ?, ?)";
+            PreparedStatement ps = con.prepareStatement( SQL, Statement.RETURN_GENERATED_KEYS );
+            ps.setString( 1, customer.getEmail() );
+            ps.setString( 2, password);
+            ps.setString( 3, customer.getFirstName() );
+            ps.setString( 4, customer.getLastName() );
+
+            ps.executeUpdate();
+            ResultSet ids = ps.getGeneratedKeys();
+            ids.next();
+
+        } catch ( ClassNotFoundException ex ) {
+            throw new LoginSampleException( ex.getMessage() );
+        } catch ( SQLException ex ){
+            throw new SQLException();
+
+        }
+    }
+
+    public static Customer login( String email, String password ) throws LoginSampleException {
+        try {
+            Connection con = Connector.connection();
+            String SQL = "SELECT firstName, lastName FROM Users "
+                    + "WHERE email=? AND password=?";
+            PreparedStatement ps = con.prepareStatement( SQL );
+            ps.setString( 1, email );
+            ps.setString( 2, password );
+            ResultSet rs = ps.executeQuery();
+            if ( rs.next() ) {
+                String fName = rs.getString( "firstName" );
+                String sName = rs.getString( "lastName" );
+                Customer customer = new Customer( email);
+                customer.setPassword(password);
+                customer.setFirstName(fName);
+                customer.setLastName(sName);
+                customer.setSaldo(0);
+
+                return customer;
+            } else {
+
+                Customer customer = new Customer( "error");
+
+                return customer;
+                //  throw new LoginSampleException( "Bruger kunne ikke valideres" );
+            }
+        } catch (  SQLException ex ) {
+            throw new LoginSampleException("Kan ikke forbindes til databasen");
+        } catch ( ClassNotFoundException ex){
+            throw new LoginSampleException("Class not found exc.");
+
+        }
+    }
+
+
+
 
     public static int saldo(String email) throws LoginSampleException {
         int saldo = 0;
@@ -92,7 +150,7 @@ public class CustomerMapper {
 
         try{
             Connection con = Connector.connection();
-            String customersSQL = "select users.email, firstname, lastname, saldo from users where not email='admin' group by email";
+            String customersSQL = "select users.email, firstname, lastname, saldo from users where not email='admin@olsker.cupcakes' group by email";
             String ordersSQL = "select orderID, email, sum from orders where comment='Paid'";
             String cupcakesSQL = "select * from orderdetails";
             int index=0;

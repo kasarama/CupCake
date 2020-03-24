@@ -77,7 +77,7 @@
                             <form name="login" action="FrontController" method="POST">
                                 <input type="hidden" name="taget" value="login">
                                 <input type="hidden" name="origin" value="cartpage">
-                                <input class="btn btn-primary" type="submit" value="Bestil" onclick="payStatus()" >
+                                <input class="btn btn-primary" type="submit" value="Bestil Cupcakes" onclick="loginFirst()">
                             </form>
                         </c:when>
                         <c:otherwise>
@@ -112,6 +112,11 @@
     function payStatus() {
 
         alert("${requestScope.payStatus}")
+    }
+
+    function loginFirst() {
+        alert("Du skal log ind først")
+
     }
 </script>
 <script>

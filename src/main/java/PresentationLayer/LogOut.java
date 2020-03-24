@@ -19,6 +19,7 @@ public class LogOut extends Command {
         request.setAttribute("cart", items);
         session.setAttribute( "user", null );
         session.setAttribute("email", null);
+        session.setAttribute("firstName", null);
         return "index";
     }
 }

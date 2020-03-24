@@ -23,7 +23,7 @@
 </div>
 
 <div>
-    <a href="FrontController?taget=redirect&destination=registerpage"><button type="button" class="btn btn-primary">Eller registrer en ny bruger</button></a>
+    <a href="FrontController?taget=redirect&destination=registerpage"><button type="button" class="btn btn-primary">Eller registrer</button></a>
 </div>
 
 <div class="container">

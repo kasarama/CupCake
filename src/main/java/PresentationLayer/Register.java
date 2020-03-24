@@ -29,13 +29,13 @@ public class Register extends Command {
         if ( password1.equals( password2 ) ) {
 
                try {
-                   User user = LogicFacade.createUser(email, password1, fName, lName);
+                   Customer customer = LogicFacade.createCustomer(email, password1, fName, lName);
                    HttpSession session = request.getSession();
 
                    session.setAttribute("email", email);
-                   session.setAttribute("user", user);
-                   session.setAttribute("fName", user.getfName());
-                   session.setAttribute("sName", user.getsName());
+                   session.setAttribute("user", customer);
+                   session.setAttribute("fName", customer.getFirstName());
+                   session.setAttribute("sName", customer.getLastName());
                    page = "customerpage";
                }catch (SQLException ex){
                    registerMSG="Email findes allerede i vores database. Prøv igen eller log ind";

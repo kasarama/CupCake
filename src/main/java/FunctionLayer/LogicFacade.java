@@ -1,7 +1,7 @@
 package FunctionLayer;
 
-import DBAccess.OrderMapper;
-import DBAccess.UserMapper;
+import DBAccess.CustomerMapper;
+
 
 import java.sql.SQLException;
 
@@ -12,25 +12,31 @@ import java.sql.SQLException;
 public class LogicFacade {
 
 
-    public static User login( String email, String password ) throws LoginSampleException {
+    public static Customer login( String email, String password ) throws LoginSampleException {
 
-User user=new User("","","","");
+Customer customer =new Customer(email);
        try {
-           user=UserMapper.login(email, password);
-           return user;
+           customer= CustomerMapper.login(email, password);
+           return customer;
        }catch (LoginSampleException ex){
-             user.setEmail("error");
+             customer.setEmail("error");
 
-           return user;
+           return customer;
 
        }
 
     }
 
-    public static User createUser( String email, String password, String fName, String sName ) throws LoginSampleException, SQLException {
-        User user = new User(email, password, fName, sName);
-        UserMapper.createUser( user );
-        return user;
+    public static Customer createCustomer( String email, String password, String fName, String sName ) throws LoginSampleException, SQLException {
+        Customer customer  = new Customer(email);
+        customer.setSaldo(0);
+        customer.setFirstName(fName);
+        customer.setLastName(sName);
+        customer.setPassword(password);
+
+
+        CustomerMapper.createCustomer( customer, password );
+        return customer;
     }
 
 }
