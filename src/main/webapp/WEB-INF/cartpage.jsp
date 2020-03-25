@@ -35,70 +35,72 @@
     </c:when>
     <c:otherwise>
 
+        <div class="card-deck mb-3 text-center" style="padding:10px;">
+            <h3>Sikkert nogle fine Cupcakes du har valgt!</h3>
+        </div>
 
-        <h3>Sikkert nogle fine Cupcakes du har valgt!</h3>
-
-        <table class="table table-sm">
-            <tr>
-                <th>Bund</th>
-                <th>Topping</th>
-                <th>Pris</th>
-                <th>Antal</th>
-            </tr>
-            <c:forEach var="item" items="${requestScope.items}">
+        <div class="card-deck mb-3 text-center" style="padding:10px;">
+            <table class="table table-sm">
                 <tr>
-                    <form name="removeItem" action="FrontController" method="POST">
-                        <input type="hidden" name="taget" value="removeItem">
-                        <input type="hidden" name="bottom" value="${item[0]}">
-                        <input type="hidden" name="topping" value="${item[1]}">
-                        <th>${item[0]}</th>
-                        <th>${item[1]}</th>
-                        <th>${item[2]}</th>
-                        <th>${item[3]}</th>
-                        <th><input type="submit" value="Slet " onclick="removItem()" ></th>
-
-                    </form>
+                    <th>Bund</th>
+                    <th>Topping</th>
+                    <th>Pris</th>
+                    <th>Antal</th>
                 </tr>
-            </c:forEach>
+                <c:forEach var="item" items="${requestScope.items}">
+                    <tr>
+                        <form name="removeItem" action="FrontController" method="POST">
+                            <input type="hidden" name="taget" value="removeItem">
+                            <input type="hidden" name="bottom" value="${item[0]}">
+                            <input type="hidden" name="topping" value="${item[1]}">
+                            <th>${item[0]}</th>
+                            <th>${item[1]}</th>
+                            <th>${item[2]}</th>
+                            <th>${item[3]}</th>
+                            <th><input type="submit" value="Slet " onclick="removItem()" ></th>
 
-            <tr>
-                <th>I alt:</th>
-                <th></th>
-                <th></th>
-                <th>${requestScope.sum}</th>
-            </tr>
+                        </form>
+                    </tr>
+                </c:forEach>
 
-            <tr>
-                <th>
+                <tr>
+                    <th>I alt:</th>
+                    <th></th>
+                    <th></th>
+                    <th>${requestScope.sum}</th>
+                </tr>
 
-                    <c:set var="val" value="${sessionScope.email}"/>
-                    <c:choose>
-                        <c:when test="${val == null}">
-                            <form name="login" action="FrontController" method="POST">
-                                <input type="hidden" name="taget" value="login">
-                                <input type="hidden" name="origin" value="cartpage">
-                                <input class="btn btn-primary" type="submit" value="Bestil Cupcakes" onclick="loginFirst()">
-                            </form>
-                        </c:when>
-                        <c:otherwise>
-                            <form name="confirmOrder" action="FrontController" method="POST">
-                                <input type="hidden" name="taget" value="confirmOrder">
-                                <input class="btn btn-primary" type="submit" value="Bestil" onclick="payStatus()" >
-                            </form>
-                        </c:otherwise>
-                    </c:choose>
-                </th>
+                <tr>
+                    <th>
 
-                <th>
-                    <form name="home" action="FrontController" method="post">
-                        <input type="hidden" name="taget" value="home">
-                        <input class="btn btn-primary" type="submit" value="Tilføj fere">
-                    </form>
+                        <c:set var="val" value="${sessionScope.email}"/>
+                        <c:choose>
+                            <c:when test="${val == null}">
+                                <form name="login" action="FrontController" method="POST">
+                                    <input type="hidden" name="taget" value="login">
+                                    <input type="hidden" name="origin" value="cartpage">
+                                    <input class="btn btn-primary" type="submit" value="Bestil Cupcakes" onclick="loginFirst()">
+                                </form>
+                            </c:when>
+                            <c:otherwise>
+                                <form name="confirmOrder" action="FrontController" method="POST">
+                                    <input type="hidden" name="taget" value="confirmOrder">
+                                    <input class="btn btn-primary" type="submit" value="Bestil" onclick="payStatus()" >
+                                </form>
+                            </c:otherwise>
+                        </c:choose>
+                    </th>
 
-                </th>
-            </tr>
-        </table>
+                    <th>
+                        <form name="home" action="FrontController" method="post">
+                            <input type="hidden" name="taget" value="home">
+                            <input class="btn btn-primary" type="submit" value="Tilføj fere">
+                        </form>
 
+                    </th>
+                </tr>
+            </table>
+        </div>
 
 
     </c:otherwise>
@@ -115,7 +117,7 @@
     }
 
     function loginFirst() {
-        alert("Du skal log ind først")
+        alert("Du skal først logge ind")
 
     }
 </script>
@@ -125,12 +127,4 @@
     }
 </script>
 
-
-
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-</body>
-</html>
+<%@include file="../includes/footer.inc"%>

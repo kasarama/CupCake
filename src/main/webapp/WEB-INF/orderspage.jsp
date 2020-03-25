@@ -12,8 +12,7 @@
         order oversigt
 
 <c:forEach var="order" items="${requestScope.ordersArray}">
-    <div class="container">
-        Ordre nr: ${order.id}
+    <div class="card-deck mb-3 text-center" style="padding:10px;">
         <table class="table table-sm">
             <tr>
                 <th>Bund</th>
@@ -44,11 +43,4 @@
     </div>
 </c:forEach>
 
-
-
-
-
-
-
-</body>
-</html>
+<%@include file="../includes/footer.inc"%>
