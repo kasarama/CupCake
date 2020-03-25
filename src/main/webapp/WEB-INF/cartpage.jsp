@@ -117,7 +117,7 @@
     }
 
     function loginFirst() {
-        alert("Du skal først logge ind")
+        alert("Log ind først")
 
     }
 </script>

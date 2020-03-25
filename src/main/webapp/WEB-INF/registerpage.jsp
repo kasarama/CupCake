@@ -38,6 +38,13 @@
     <div class="card-deck mb-3 text-center" style="padding:10px;">
         <table class="table table-sm">    ${requestScope.registerMSG}
     </div>
+
+    <c:if test = "${requestScope.error!= null}" >
+    <div class="card-deck mb-3 text-center" style="padding:10px;">
+        <h2>Error ! </h2>
+        ${requestScope.error}
+    </div>
+    </c:if>
 </div>
 
 <script>

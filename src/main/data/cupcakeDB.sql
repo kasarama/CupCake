@@ -16,57 +16,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `components`
---
-
-DROP TABLE IF EXISTS `components`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `components` (
-  `component` varchar(45) NOT NULL,
-  `price` int DEFAULT NULL,
-  PRIMARY KEY (`component`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `components`
---
-
-LOCK TABLES `components` WRITE;
-/*!40000 ALTER TABLE `components` DISABLE KEYS */;
-INSERT INTO `components` VALUES ('Almond',7),('Blueberry',5),('BlueChees',9),('Chocolate',5),('Crispy',6),('Lemon',8),('Nutmeg',5),('Orange',8),('Pistacio',6),('Rasberry',5),('RumRaisin',7),('Strawberry',6),('Vanilla',5);
-/*!40000 ALTER TABLE `components` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `customers`
---
-
-DROP TABLE IF EXISTS `customers`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `customers` (
-  `e-mail` varchar(45) NOT NULL,
-  `firstName` varchar(45) DEFAULT NULL,
-  `lastName` varchar(45) DEFAULT NULL,
-  `saldo` double DEFAULT NULL,
-  `address` varchar(45) DEFAULT NULL,
-  `postcode` int DEFAULT NULL,
-  PRIMARY KEY (`e-mail`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `customers`
---
-
-LOCK TABLES `customers` WRITE;
-/*!40000 ALTER TABLE `customers` DISABLE KEYS */;
-/*!40000 ALTER TABLE `customers` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `orderdetails`
 --
 
@@ -79,12 +28,11 @@ CREATE TABLE `orderdetails` (
   `bottom` varchar(45) DEFAULT NULL,
   `topping` varchar(45) DEFAULT NULL,
   `quantity` int DEFAULT NULL,
-  `status` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`orderLineID`),
   UNIQUE KEY `orderLineID_UNIQUE` (`orderLineID`),
   KEY `orderID_idx` (`orderID`),
   CONSTRAINT `orderID` FOREIGN KEY (`orderID`) REFERENCES `orders` (`orderID`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=187 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -93,7 +41,7 @@ CREATE TABLE `orderdetails` (
 
 LOCK TABLES `orderdetails` WRITE;
 /*!40000 ALTER TABLE `orderdetails` DISABLE KEYS */;
-INSERT INTO `orderdetails` VALUES (1,NULL,'Choc','Van',3,NULL),(2,NULL,'Chocolate','Chocolate',1,'inCart'),(11,NULL,NULL,NULL,1,'inCart'),(12,NULL,NULL,NULL,18,'inCart'),(13,NULL,'d',NULL,50,NULL),(14,NULL,'Pistacio','Rasberry',3,'inCart'),(15,NULL,'Chocolate','Chocolate',1,'inCart');
+INSERT INTO `orderdetails` VALUES (174,72,'Chocolate','Chocolate',1),(175,72,'Pistacio','Lemon',2),(176,72,'Vanilla','BlueCheese',3),(177,73,'Chocolate','Chocolate',2),(178,74,'Pistacio','Orange',1),(179,75,'Almond','BlueCheese',1),(180,75,'Chocolate','Chocolate',1),(181,75,'Vanilla','RumRaisin',10),(182,76,'Chocolate','Lemon',1),(183,76,'Nutmeg','RumRaisin',1),(184,77,'Vanilla','Orange',2),(185,77,'Chocolate','Chocolate',1),(186,77,'Nutmeg','Crispy',1);
 /*!40000 ALTER TABLE `orderdetails` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -106,13 +54,14 @@ DROP TABLE IF EXISTS `orders`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `orders` (
   `orderID` int NOT NULL AUTO_INCREMENT,
-  `e-mail` varchar(45) DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
   `sum` int DEFAULT NULL,
+  `comment` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`orderID`),
   UNIQUE KEY `orderID_UNIQUE` (`orderID`),
-  KEY `e-mail_idx` (`e-mail`),
-  CONSTRAINT `e-mail` FOREIGN KEY (`e-mail`) REFERENCES `customers` (`e-mail`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `e-mail_idx` (`email`),
+  CONSTRAINT `e-mail` FOREIGN KEY (`email`) REFERENCES `users` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -121,30 +70,35 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
+INSERT INTO `orders` VALUES (72,'ola@manola.com',80,'Paid'),(73,'ola@manola.com',20,'Paid'),(74,'ola@manola.com',14,'Paid'),(75,'tmp@mail.com',146,'Paid'),(76,'tmp@mail.com',25,'Paid'),(77,'tmp@mail.com',47,'Paid');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `postcodes`
+-- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `postcodes`;
+DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `postcodes` (
-  `postcode` int NOT NULL,
-  `city` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`postcode`)
+CREATE TABLE `users` (
+  `email` varchar(45) NOT NULL,
+  `firstName` varchar(45) DEFAULT NULL,
+  `lastName` varchar(45) DEFAULT NULL,
+  `saldo` double DEFAULT NULL,
+  `password` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `postcodes`
+-- Dumping data for table `users`
 --
 
-LOCK TABLES `postcodes` WRITE;
-/*!40000 ALTER TABLE `postcodes` DISABLE KEYS */;
-/*!40000 ALTER TABLE `postcodes` ENABLE KEYS */;
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES ('admin@olsker.cupcakes','Adam','Meen',NULL,'admin'),('kunde@mail.com','Rocky','Balboa',0,'kunde'),('magdalena.wawrzak@gmail.com','Magdalena','Wawrzak',20,'magda'),('ola@manola.com','Ola','Manola',36,'ola'),('tmp@mail.com','Tom','Jerry',32,'tmp');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -156,4 +110,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-14  9:51:47
+-- Dump completed on 2020-03-25 13:15:38

@@ -36,7 +36,7 @@ public class ShowCart extends Command {
 
         if (difference<0){
             payStatus ="Du har dæsvære ikke nok penge på din konto. " +
-                    "Slet nogle af Cupcakes fra din indkøbskurv, gem ordre for at bestile senere eller slet den ";
+                    "Kontakt butikken for at indbetale på din konto, slet nogle af Cupcakes fra din indkøbskurv eller slet ordre ";
 
         }else{
             payStatus =  "Bekræft din bestiling ved at klikke \"Betal\" knappen";
