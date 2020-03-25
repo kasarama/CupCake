@@ -19,7 +19,7 @@
 
 <div>
     <h1>Øens bedste cupcakes!</h1>
-    <h2>Velkommen ombord ${sessionScope.firstName}!</h2>
+
     <h3>Vælg og bestil her:</h3>
 </div>
 

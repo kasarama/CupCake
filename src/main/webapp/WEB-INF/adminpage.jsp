@@ -11,7 +11,7 @@
 
 
 
-<div class="container">
+<div class="container"  style="padding:10px;">
     <div class="card-deck mb-3 text-center">
         <div class="card mb-4 shadow-sm">
             <img src="img/cart.png" class="card-img-top" alt="Ordrer">
