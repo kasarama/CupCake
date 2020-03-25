@@ -27,7 +27,6 @@ public class Pay extends Command {
         int items= order.items();
         request.setAttribute("cart", items);
 
-
         request.setAttribute("saldo", saldo);
 
 

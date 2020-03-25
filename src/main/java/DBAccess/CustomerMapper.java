@@ -114,7 +114,6 @@ public class CustomerMapper {
                 updated=true;
 
             }
-        System.out.println("It is " + updated +", that saldo has been updated");
             return updated;
     }
 
@@ -123,7 +122,7 @@ public class CustomerMapper {
         int number=0;
         try{
             Connection con = Connector.connection();
-            String sql="SELECT Count(email) AS numberOfCustomers FROM users where not email='admin'";
+            String sql="SELECT Count(email) AS numberOfCustomers FROM users where not email='admin@olsker.cupcakes'";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet resultSet = ps.executeQuery();
             while (resultSet.next()){

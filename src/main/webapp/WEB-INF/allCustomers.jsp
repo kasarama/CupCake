@@ -11,41 +11,43 @@
 <%@include file="../includes/header.inc"%>
 <h1>Oversigt over alle kunder og derers ordrer</h1><br><br><br>
 
-<div class="container">
-<table class="table table-sm">
-    <tr>
-        <th>e-mail</th>
-        <th>fornavn</th>
-        <th>efternavn</th>
-        <th>saldo</th>
-        <th colspan="2">ordrer</th>
-    </tr>
+<div class="container"  style="padding:10px;">
+
 
     <c:forEach var="customer" items="${requestScope.allCustomers}">
-    <tr>
-        <td>${customer.email}</td>
-        <td>${customer.firstName}</td>
-        <td>${customer.lastName}</td>
-        <td>${customer.saldo}</td>
-        <td>ordre ID</td>
-        <td>sum</td>
-    </tr>
-        <c:forEach var="order" items="${customer.orders}">
+    <div class="card-deck mb-3 text-center" style="padding:10px;">
+        <table class="table table-sm">
             <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>${order.id}</td>
-            <td>${order.sum}</td>
+                <th>e-mail</th>
+                <th>fornavn</th>
+                <th>efternavn</th>
+                <th>saldo</th>
+                <th colspan="2">ordrer</th>
             </tr>
-        </c:forEach>
-
+            <tr>
+                <td>${customer.email}</td>
+                <td>${customer.firstName}</td>
+                <td>${customer.lastName}</td>
+                <td>${customer.saldo}</td>
+                <td>ordre ID</td>
+                <td>sum</td>
+            </tr>
+                <c:forEach var="order" items="${customer.orders}">
+                    <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>${order.id} </td>
+                    <td> ${order.sum}</td>
+                    </tr>
+                </c:forEach>
+        </table>
+    </div>
     </c:forEach>
 
-</table>
+
 </div>
 
 
-</body>
-</html>
+<%@include file="../includes/footer.inc"%>
