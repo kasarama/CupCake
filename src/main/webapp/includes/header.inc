@@ -17,14 +17,21 @@
 <!-- Navigation -->
     <div class="container">
         <div class="container">
+        <a href="FrontController?taget=redirect&destination=index">
             <img src="img/olskercupcakes.png" class="img-fluid mb-4">
+        </a>
         </div>
         <div class="container">
             <ul class="nav nav-pills nav-fill">
                 <c:set var="val" value="${sessionScope.email}"/>
                 <c:choose>
                     <c:when test="${val == null}">
-                        ${null}
+                          <li class="nav-item">
+                            <form name="home" action="FrontController" method="post">
+                               <input type="hidden" name="taget" value="home">
+                               <input class="btn btn-outline-secondary" type="submit" value="Olsker Cupcakes">
+                            </form>
+                          </li>
                     </c:when>
                     <c:when test="${val == 'admin@olsker.cupcakes'}">
                 <li class="nav-item">
@@ -90,8 +97,6 @@
                 </li>
                     </c:otherwise>
                 </c:choose>
-
-
                 <c:set var="val" value="${sessionScope.email}"/>
                 <c:choose>
                     <c:when test="${val == null}">
@@ -111,7 +116,6 @@
                 <c:set var="val" value="${sessionScope.email}"/>
                 <c:choose>
                     <c:when test="${val == null}">
-
                 <li class="nav-item">
                         <a href="FrontController?taget=redirect&destination=loginpage">
                             <button type="button" class="btn btn-outline-secondary">Log ind</button>
@@ -125,7 +129,6 @@
                 </li>
                     </c:otherwise>
                 </c:choose>
-
                 <li class="nav-item">
                 </li>
                 <c:set var="val" value="${sessionScope.email}"/>

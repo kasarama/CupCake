@@ -27,9 +27,10 @@
 <c:choose>
     <c:when test="${val == '0'}">
 
-        <h3>Din indkøbskurv ser tomt ud...</h3>
-        <a href="FrontController?taget=redirect&destination=index"><button class="btn btn-primary" type="button">Find nogle Cupcakes her</button></a>
-
+        <div class="card-deck mb-3 text-center" style="padding:10px;">
+            <h3>Din indkøbskurv ser tomt ud...</h3>
+            <a href="FrontController?taget=redirect&destination=index"><button class="btn btn-primary" type="button">Find nogle Cupcakes her</button></a>
+        </div>
 
 
     </c:when>

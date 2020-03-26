@@ -10,7 +10,7 @@
 <%@include file="../includes/header.inc"%>
 
 <div class="card-deck mb-3 text-center" style="padding:10px;">
-    <h1>Oversigt over ordrer af alle kunder</h1>
+    <h2>Oversigt over ordrer af alle kunder</h2>
 </div>
 
 

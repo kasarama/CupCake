@@ -40,7 +40,7 @@ public class CustomerMapper {
     public static Customer login( String email, String password ) throws LoginSampleException {
         try {
             Connection con = Connector.connection();
-            String SQL = "SELECT firstName, lastName FROM Users "
+            String SQL = "SELECT firstName, lastName FROM users "
                     + "WHERE email='"+email+"' AND password='"+password+"'";
             PreparedStatement ps = con.prepareStatement( SQL );
 
@@ -63,6 +63,7 @@ public class CustomerMapper {
                 //  throw new LoginSampleException( "Bruger kunne ikke valideres" );
             }
         } catch (  SQLException ex ) {
+
             throw new LoginSampleException("Kan ikke forbindes til databasen");
         } catch ( ClassNotFoundException ex){
             throw new LoginSampleException("Class not found exc.");

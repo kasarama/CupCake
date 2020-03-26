@@ -11,6 +11,9 @@
 
 <div class="card-deck mb-3 text-center" style="padding:10px;">
     <h1>Tak fordi at du handlede hos os!</h1>
+</div>
+<div class="card-deck mb-3 text-center" style="padding:10px;">
+
     <h2>Din ny saldo er ${requestScope.saldo}</h2>
 </div>
 
