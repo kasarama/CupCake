@@ -41,10 +41,9 @@ public class CustomerMapper {
         try {
             Connection con = Connector.connection();
             String SQL = "SELECT firstName, lastName FROM Users "
-                    + "WHERE email=? AND password=?";
+                    + "WHERE email='"+email+"' AND password='"+password+"'";
             PreparedStatement ps = con.prepareStatement( SQL );
-            ps.setString( 1, email );
-            ps.setString( 2, password );
+
             ResultSet rs = ps.executeQuery();
             if ( rs.next() ) {
                 String fName = rs.getString( "firstName" );

@@ -19,13 +19,8 @@
         <div class="container">
             <img src="img/olskercupcakes.png" class="img-fluid mb-4">
         </div>
-
-
         <div class="container">
             <ul class="nav nav-pills nav-fill">
-
-
-
                 <c:set var="val" value="${sessionScope.email}"/>
                 <c:choose>
                     <c:when test="${val == null}">
@@ -39,14 +34,12 @@
                 </li>
                     </c:when>
                     <c:otherwise>
-
                 <li class="nav-item">
                         <form name="home" action="FrontController" method="post">
                             <input type="hidden" name="taget" value="home">
                             <input class="btn btn-outline-secondary" type="submit" value="Olsker Cupcakes">
                         </form>
                 </li>
-
                 <li class="nav-item">
                         <a href="FrontController?taget=redirect&destination=customerpage">
                             <button type="button" class="btn btn-outline-secondary">Min side</button>
@@ -95,7 +88,6 @@
                             <input class="btn btn-outline-secondary" type="submit" value="Mine ordrer">
                         </form>
                 </li>
-
                     </c:otherwise>
                 </c:choose>
 
@@ -134,7 +126,8 @@
                     </c:otherwise>
                 </c:choose>
 
-
+                <li class="nav-item">
+                </li>
                 <c:set var="val" value="${sessionScope.email}"/>
                 <c:choose>
                     <c:when test="${val == 'admin@olsker.cupcakes'}">
@@ -151,8 +144,6 @@
                 </li>
                     </c:otherwise>
                 </c:choose>
-
             </ul>
         </div>
-
     </div>

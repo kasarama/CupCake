@@ -1,8 +1,11 @@
 package DBAccess;
 
+import Util.HelpClass;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  The purpose of Connector is to...
@@ -38,6 +41,7 @@ public class Connector {
             USERNAME = System.getenv("JDBC_USER");
             PASSWORD = System.getenv("JDBC_PASSWORD");
         } else {
+
             URL = "jdbc:mysql://localhost:3306/cupcake?serverTimezone=UTC";
             USERNAME = "root";
             PASSWORD = "1909145380Hanna";

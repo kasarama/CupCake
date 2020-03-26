@@ -11,6 +11,7 @@
 
 
     <div class="container"  style="padding:10px;">
+
         <div class="card-deck mb-3 text-center">
             <div class="card mb-4 shadow-sm">
             </div>
@@ -18,8 +19,9 @@
 
 
         <div class="card-deck mb-3 text-center">
-            <div class="card mb-4 shadow-sm">
-                <form name="login" action="FrontController" method="POST">
+
+        <div class="card mb-4 shadow-sm">
+            <form name="login" action="FrontController" method="POST">
                 <input type="hidden" name="taget" value="login">
                 Email:<br>
                 <input type="email" name="email" value="" onsubmit="required()">
@@ -29,12 +31,13 @@
                 <br>
                 <input class="btn btn-primary" type="submit" value="Log ind">
             </form>
-                <div class="card mb-4 shadow-sm">
-                    <a href="FrontController?taget=redirect&destination=registerpage">
-                        <img src="img/sampleCupcake.png" height="50px">
-                        <button type="button" class="btn btn-primary">Eller registrer</button>
-                    </a>
-                </div>
+
+            <div class="card mb-4 shadow-sm">
+                <a href="FrontController?taget=redirect&destination=registerpage">
+                     <img src="img/sampleCupcake.png" height="50px">
+                     <button type="button" class="btn btn-primary">Eller registrer</button>
+                </a>
+            </div>
         </div>
 
 

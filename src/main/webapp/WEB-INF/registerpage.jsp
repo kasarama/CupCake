@@ -11,46 +11,59 @@
 
 
 
-
-<div class="card-deck mb-3 text-center" style="padding:10px;">
+<div class="container"  style="padding:10px;">
     <div class="card-deck mb-3 text-center">
-        <form name="register" action="FrontController" method="POST" onsubmit="required()">
-            <input type="hidden" name="taget" value="register">
-
-            Email:<br>
-            <input type="email" name="email" value="${requestScope.givenemail}" required>
-            <br>
-            Adgangskode:<br>
-            <input type="password" name="password1" value="" required>
-            <br>
-            Gentag adgangskode:<br>
-            <input type="password" name="password2" value="" required>
-            <br>
-            Fornavn:<br>
-            <input type="text" name="fName" value="${requestScope.givenfName}" required>
-            <br>
-            Efternavn:<br>
-            <input type="text" name="lName" value="${requestScope.givenelName}" required>
-            <br>
-            <input class="btn btn-primary" type="submit" value="Registrer" >
-        </form>
-    </div>
-    <div class="card-deck mb-3 text-center" style="padding:10px;">
-        <table class="table table-sm">    ${requestScope.registerMSG}
+        <div class="card mb-4 shadow-sm">
+        </div>
     </div>
 
-    <c:if test = "${requestScope.error!= null}" >
-    <div class="card-deck mb-3 text-center" style="padding:10px;">
-        <h2>Error ! </h2>
-        ${requestScope.error}
+
+    <div class="card-deck mb-3 text-center">
+        <div class="card mb-4 shadow-sm">
+            <form name="register" action="FrontController" method="POST" onsubmit="required()">
+                <input type="hidden" name="taget" value="register">
+
+                Email:<br>
+                <input type="email" name="email" value="${requestScope.givenemail}" required>
+                <br>
+                Adgangskode:<br>
+                <input type="password" name="password1" value="" required>
+                <br>
+                Gentag adgangskode:<br>
+                <input type="password" name="password2" value="" required>
+                <br>
+                Fornavn:<br>
+                <input type="text" name="fName" value="${requestScope.givenfName}" required>
+                <br>
+                Efternavn:<br>
+                <input type="text" name="lName" value="${requestScope.givenelName}" required>
+                <br>
+                <input class="btn btn-primary" style="padding: 10px;" type="submit" value="Registrer" >
+            </form>
+        </div>
     </div>
-    </c:if>
+
+    <div class="card-deck mb-3 text-center">
+        <div class="card mb-4 shadow-sm">
+            ${requestScope.registerMSG}
+        </div>
+    </div>
+
 </div>
+
+
+        <c:if test = "${requestScope.error!= null}" >
+        <div class="card-deck mb-3 text-center" style="padding:10px;">
+            <h2>Error ! </h2>
+            ${requestScope.error}
+        </div>
+        </c:if>
+    </div>
 
 <script>
     function required()
     {
-       alert('Vi har modtaget registration form');
+       alert('Vi har modtaget registration form.');
 
     }
 
