@@ -1,0 +1,50 @@
+@startuml
+
+title Domæne Model
+
+object Bruger {
+    e-mail
+    fornavn
+    efternavn
+    kodeord
+}
+
+object Kunde {
+    liste med ordrer
+}
+
+object Administrator {
+
+}
+
+object Konto {
+    saldo
+    }
+
+object Cupcake {
+    bund
+    top
+    pris
+}
+
+object Ordre {
+    ID
+    liste med Cupcake
+    sum
+}
+
+
+object Kurv {
+
+}
+
+Bruger "1" -- "1" Kunde
+Bruger "1" -- "1" Administrator
+Kunde "1" -- "*" Ordre : kan lave og se
+Ordre "1"--"*" Cupcake : består af
+Kurv "1"--"*" Ordre : indstiller
+Bruger "1" -- "1" Konto : logger ind på
+Administrator "1" -- "*" Kunde : kan se og ændre saldo
+Administrator "1" -- "*" Ordre : kan se og slette
+
+@enduml

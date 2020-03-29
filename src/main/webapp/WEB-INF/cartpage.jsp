@@ -44,7 +44,7 @@
             <table class="table table-sm">
                 <tr>
                     <th>Bund</th>
-                    <th>Topping</th>
+                    <th>Top</th>
                     <th>Pris</th>
                     <th>Antal</th>
                 </tr>

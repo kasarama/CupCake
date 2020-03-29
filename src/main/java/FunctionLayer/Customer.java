@@ -8,7 +8,6 @@ public class Customer {
     private String lastName;
     private ArrayList<Order> orders;
     private int saldo;
-    private String password;
 
     public Customer(String email) {
         this.email = email;
@@ -16,7 +15,6 @@ public class Customer {
         this.firstName=firstName;
         this.lastName=lastName;
         this.saldo=saldo;
-        this.password=password;
     }
 
     public void add(Order order){
@@ -63,6 +61,4 @@ public class Customer {
         this.saldo = saldo;
     }
 
-    public  void setPassword(String password) { this.password=password;
-    }
 }

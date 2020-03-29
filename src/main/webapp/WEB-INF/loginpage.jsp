@@ -38,22 +38,23 @@
                      <button type="button" class="btn btn-primary">Eller registrer</button>
                 </a>
             </div>
-        </div>
 
 
+            <c:if test = "${requestScope.errorMSG!= null}">
+            <div class="card mb-4 shadow-sm">
+                <h3>${requestScope.errorMSG}</h3>
+            </div>
+            </c:if>
 
-    <div class="card-deck mb-3 text-center" style="padding:10px;">
-        <c:if test = "${requestScope.errorMSG!= null}" >
-        <h2>${requestScope.errorMSG}</h2>
-        </c:if>
-    </div>
+            </div>
+
 <script>
     // If the length of the element's string is 0 then display helper message
     function required(inputtx)
     {
         if (inputtx.value.length == 0)
         {
-            alert("message");
+            alert("Det er nemmere at logge dig ind, hvis du skriver noget");
             return false;
         }
         return true;

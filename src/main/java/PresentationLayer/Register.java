@@ -33,7 +33,7 @@ public class Register extends Command {
                    HttpSession session = request.getSession();
 
                    session.setAttribute("email", email);
-                   session.setAttribute("user", customer);
+
                    session.setAttribute("firstName", customer.getFirstName());
 
                    page = "customerpage";
@@ -41,9 +41,6 @@ public class Register extends Command {
                    registerMSG="Email findes allerede i vores database. Prøv igen eller log ind";
 
                }
-
-
-
 
 
         } else

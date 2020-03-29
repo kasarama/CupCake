@@ -20,7 +20,7 @@ du er logget ind som ${sessionScope.email}
 
         <tr>
             <th>Bund</th>
-            <th>Topping</th>
+            <th>Top</th>
             <th>Pris</th>
             <th>Antal</th>
         </tr>

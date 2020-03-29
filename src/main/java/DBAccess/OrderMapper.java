@@ -39,7 +39,7 @@ public class OrderMapper {
                 ps.executeUpdate(sqlSaveDetails);
             }
 
-        } catch(SQLException |ClassNotFoundException ex )
+        } catch(SQLException ex )
         {
             ex.printStackTrace();
             throw new LoginSampleException(ex.getMessage());
@@ -61,7 +61,7 @@ public class OrderMapper {
                 number=resultSet.getInt("numberOfOrders");
 
             }
-        } catch(SQLException | ClassNotFoundException ex )
+        } catch(SQLException ex )
 
         {
             ex.printStackTrace();
@@ -91,7 +91,7 @@ public class OrderMapper {
             }
 
 
-        } catch (SQLException | ClassNotFoundException | NullPointerException ex) {
+        } catch (SQLException | NullPointerException ex) {
 
             ex.printStackTrace();
 
@@ -136,7 +136,7 @@ int count =1;
 
                 }
             }
-        } catch (SQLException |  ClassNotFoundException ex) {
+        } catch (SQLException ex) {
             ex.printStackTrace();
 
             throw new LoginSampleException(ex.getMessage());
@@ -150,8 +150,7 @@ int count =1;
                 String sql = "update orders set comment='"+comment+"' where orderID="+orderID;
                 PreparedStatement ps = con.prepareStatement(sql);
                 ps.executeUpdate(sql);
-            } catch (SQLException |
-                    ClassNotFoundException ex) {
+            } catch (SQLException ex) {
                 ex.printStackTrace();
 
                 throw new LoginSampleException(ex.getMessage());

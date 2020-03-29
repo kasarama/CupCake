@@ -23,7 +23,7 @@
                     <tr>
                         <th>Ordre nr: ${order.id}</th>
                         <th>Bund</th>
-                        <th>Topping</th>
+                        <th>Top</th>
                         <th>Antal</th>
                     </tr>
 

@@ -40,7 +40,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Vælg din Cupcake</h5>
-                        <p class="card-text">Vælg din yndlings bund og sprøjt noget lækkert topping på den</p>
+                        <p class="card-text">Vælg din yndlings bund og sprøjt noget lækkert top på den</p>
                         <form name="home" action="FrontController" method="POST">
                             <input type="hidden" name="taget" value="home">
                             <input class="btn btn-primary" type="submit" value="Vælg">

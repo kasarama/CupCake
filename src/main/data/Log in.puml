@@ -1,0 +1,30 @@
+@startuml
+
+title "Login - Sequence Diagram"
+
+actor User
+boundary login.jsp
+boundary customerpage.jsp
+boundary cartpage.jsp
+participant PresentationLayer.Login
+participant FunctionLayer.LogicalFacade
+participant DBAcces.CustomerMpper
+database cupcakeDatabase
+
+User -> login.jsp : email & password, origin
+login.jsp -> PresentationLayer.Login : http POST login
+PresentationLayer.Login -> FunctionLayer.LogicalFacade : login()
+FunctionLayer.LogicalFacade -> DBAcces.CustomerMpper : login()
+DBAcces.CustomerMpper -> cupcakeDatabase : executeQuery()
+
+cupcakeDatabase -> DBAcces.CustomerMpper : ResultSet
+DBAcces.CustomerMpper -> FunctionLayer.LogicalFacade: Customer
+FunctionLayer.LogicalFacade ->PresentationLayer.Login: validate Customer
+PresentationLayer.Login -> cartpage.jsp : OK, origin=cartpage
+cartpage.jsp -> User : Show cart
+PresentationLayer.Login -> customerpage.jsp: OK, origin==null
+PresentationLayer.Login -> login.jsp: error
+login.jsp -> User : error msg
+customerpage.jsp -> User: Welcome
+
+@enduml

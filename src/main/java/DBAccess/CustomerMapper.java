@@ -14,131 +14,119 @@ import java.util.HashMap;
 public class CustomerMapper {
 
 
-
-    public static void createCustomer( Customer customer, String password ) throws LoginSampleException, SQLException {
+    public static void createCustomer(Customer customer, String password) throws LoginSampleException {
         try {
             Connection con = Connector.connection();
             String SQL = "INSERT INTO users (email, password, firstName, lastName, saldo) VALUES (?, ?, ?, ?, 0)";
-            PreparedStatement ps = con.prepareStatement( SQL, Statement.RETURN_GENERATED_KEYS );
-            ps.setString( 1, customer.getEmail() );
-            ps.setString( 2, password);
-            ps.setString( 3, customer.getFirstName() );
-            ps.setString( 4, customer.getLastName() );
+            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, customer.getEmail());
+            ps.setString(2, password);
+            ps.setString(3, customer.getFirstName());
+            ps.setString(4, customer.getLastName());
 
             ps.executeUpdate();
             ResultSet ids = ps.getGeneratedKeys();
             ids.next();
 
-        } catch ( ClassNotFoundException ex ) {
-            throw new LoginSampleException( ex.getMessage() );
-        } catch ( SQLException ex ){
-            throw new SQLException();
+
+        } catch (SQLException ex) {
+            throw new LoginSampleException("Det ser ud til at e-mail er allerede i brug. Prøv igen eller log ind");
 
         }
     }
 
-    public static Customer login( String email, String password ) throws LoginSampleException {
-        try {
-            Connection con = Connector.connection();
-            String SQL = "SELECT firstName, lastName FROM users "
-                    + "WHERE email='"+email+"' AND password='"+password+"'";
-            PreparedStatement ps = con.prepareStatement( SQL );
+    public static Customer login(String email, String password) throws LoginSampleException {
+       try {
+           Connection con = Connector.connection();
 
-            ResultSet rs = ps.executeQuery();
-            if ( rs.next() ) {
-                String fName = rs.getString( "firstName" );
-                String sName = rs.getString( "lastName" );
-                Customer customer = new Customer( email);
-                customer.setPassword(password);
-                customer.setFirstName(fName);
-                customer.setLastName(sName);
-                customer.setSaldo(0);
+           String SQL = "SELECT firstName, lastName FROM users "
+                   + "WHERE email='" + email + "' AND password='" + password + "'";
+           PreparedStatement ps = null;
 
-                return customer;
-            } else {
+           ps = con.prepareStatement(SQL);
+           ResultSet rs = ps.executeQuery();
 
-                Customer customer = new Customer( "error");
 
-                return customer;
-                //  throw new LoginSampleException( "Bruger kunne ikke valideres" );
-            }
-        } catch (  SQLException ex ) {
+           //throw new LoginSampleException("Huston, we've got a problem! \nRing til Huston(+45 81917452) og sig \"Fejlkode LoginQuery\"!");
 
-            throw new LoginSampleException("Kan ikke forbindes til databasen");
-        } catch ( ClassNotFoundException ex){
-            throw new LoginSampleException("Class not found exc.");
 
-        }
+           if (rs.next()) {
+               String fName = rs.getString("firstName");
+               String sName = rs.getString("lastName");
+               Customer customer = new Customer(email);
+               customer.setFirstName(fName);
+               customer.setLastName(sName);
+               customer.setSaldo(0);
+               return customer;
+           } else {
+               throw new LoginSampleException("Jeg kunne ikke genkende dig. Prøv igen eller registrer dig som ny kunde.");
+           }
+       }catch (SQLException ex){
+           ex.printStackTrace();
+           throw new LoginSampleException("Jeg kunne ikke forbindes med databasen. Kontakt butikken");
+       }
+
     }
-
-
 
 
     public static int saldo(String email) throws LoginSampleException {
         int saldo = 0;
-        try{
+        try {
             Connection con = Connector.connection();
-            String sql = "select * from users where email='"+email+"'";
+            String sql = "select * from users where email='" + email + "'";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet resultSet = ps.executeQuery();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 saldo = resultSet.getInt("saldo");
             }
 
-        } catch(SQLException |
-                ClassNotFoundException ex )
-        {
+        } catch (SQLException ex) {
             throw new LoginSampleException(ex.getMessage());
         }
         return saldo;
     }
 
     public static boolean updateSaldo(String email, int sum) throws LoginSampleException {
-        boolean updated=false;
-        int affectedRows=0;
-        try{
+        boolean updated = false;
+        int affectedRows = 0;
+        try {
             Connection con = Connector.connection();
-            String sql = "UPDATE users SET saldo = saldo+"+sum+" WHERE email='"+email+"'";
+            String sql = "UPDATE users SET saldo = saldo+" + sum + " WHERE email='" + email + "'";
 
             PreparedStatement ps = con.prepareStatement(sql);
             ps.executeUpdate(sql);
-            affectedRows=ps.getUpdateCount();
+            affectedRows = ps.getUpdateCount();
 
 
-        } catch(SQLException |
-                ClassNotFoundException ex ) {
+        } catch (SQLException ex) {
             ex.printStackTrace();
             throw new LoginSampleException(ex.getMessage());
         }
-            if (affectedRows!=0){
-                updated=true;
+        if (affectedRows != 0) {
+            updated = true;
 
-            }
-            return updated;
+        }
+        return updated;
     }
 
 
-    public static int numberOfCustomers () throws LoginSampleException {
-        int number=0;
-        try{
+    public static int numberOfCustomers() throws LoginSampleException {
+        int number = 0;
+        try {
             Connection con = Connector.connection();
-            String sql="SELECT Count(email) AS numberOfCustomers FROM users where not email='admin@olsker.cupcakes'";
+            String sql = "SELECT Count(email) AS numberOfCustomers FROM users where not email='admin@olsker.cupcakes'";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet resultSet = ps.executeQuery();
-            while (resultSet.next()){
-                number=resultSet.getInt("numberOfCustomers");
+            while (resultSet.next()) {
+                number = resultSet.getInt("numberOfCustomers");
 
 
             }
-        } catch(SQLException |
-                ClassNotFoundException ex )
-
-        {
-            throw new LoginSampleException(ex.getMessage());
+        } catch (SQLException ex) {
+            throw new LoginSampleException("Jeg kan ikke se nogle kunde i databasen. Kontakt din IT service firma (Huston: +4581917452)");
         }
         return number;
     }
-
 
 
     public static Customer[] listOfCustomersWithOrders() throws LoginSampleException {
@@ -146,15 +134,15 @@ public class CustomerMapper {
         //todo get all ordered cupcakes from DB and put them to appropriate orders
         //todo put orders to appropriate customers
 
-        Customer[] listOfCustomers=new Customer[numberOfCustomers()];
+        Customer[] listOfCustomers = new Customer[numberOfCustomers()];
 
 
-        try{
+        try {
             Connection con = Connector.connection();
             String customersSQL = "select users.email, firstname, lastname, saldo from users where not email='admin@olsker.cupcakes' group by email";
             String ordersSQL = "select orderID, email, sum from orders where comment='Paid'";
             String cupcakesSQL = "select * from orderdetails";
-            int index=0;
+            int index = 0;
 
             PreparedStatement ps = con.prepareStatement(customersSQL);
             ResultSet resultSet = ps.executeQuery();
@@ -169,25 +157,25 @@ public class CustomerMapper {
                 customer.setFirstName(firstName);
                 customer.setLastName(lastName);
                 customer.setSaldo(saldo);
-                listOfCustomers[index]=customer;
+                listOfCustomers[index] = customer;
                 index++;
             }
 
 
             ps = con.prepareStatement(ordersSQL);
             resultSet = ps.executeQuery();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 int orderID = resultSet.getInt("orderID");
                 String email = resultSet.getString("email");
                 int sum = resultSet.getInt("sum");
-                Order order= new Order();
+                Order order = new Order();
                 order.setId(orderID);
                 order.setSum(sum);
 
-                for (int i = 0; i < listOfCustomers.length ; i++) {
+                for (int i = 0; i < listOfCustomers.length; i++) {
 
 
-                    if(listOfCustomers[i].getEmail().equals(email)){
+                    if (listOfCustomers[i].getEmail().equals(email)) {
                         listOfCustomers[i].add(order);
                     }
 
@@ -198,29 +186,26 @@ public class CustomerMapper {
             resultSet = ps.executeQuery();
 
             while (resultSet.next()) {
-                int orderID=resultSet.getInt("orderID");
+                int orderID = resultSet.getInt("orderID");
                 String bottom = resultSet.getString("bottom");
                 String topping = resultSet.getString("topping");
                 int quantity = resultSet.getInt("quantity");
                 Cupcake cupcake = new Cupcake(bottom, topping);
-                for (Customer customer: listOfCustomers) {
-                    for (Order order: customer.getOrders()) {
-                        if(order.getId()==orderID){
+                for (Customer customer : listOfCustomers) {
+                    for (Order order : customer.getOrders()) {
+                        if (order.getId() == orderID) {
                             order.addCupcake(cupcake, quantity);
                         }
                     }
                 }
             }
 
-        } catch(SQLException |
-                ClassNotFoundException ex )
-        {
+        } catch (SQLException ex) {
             throw new LoginSampleException(ex.getMessage());
         }
 
         return listOfCustomers;
     }
-
 
 
 }

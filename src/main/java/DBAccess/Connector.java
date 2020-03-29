@@ -1,5 +1,6 @@
 package DBAccess;
 
+import FunctionLayer.LoginSampleException;
 import Util.HelpClass;
 
 import java.sql.Connection;
@@ -24,11 +25,19 @@ public class Connector {
         singleton = con;
     }
 
-    public static Connection connection() throws ClassNotFoundException, SQLException {
+    public static Connection connection() throws LoginSampleException {
         if (singleton == null) {
             setDBCredentials();
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            singleton = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                singleton = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            }catch (SQLException ex) {
+                ex.printStackTrace();
+                throw new LoginSampleException("Huston, we've got a problem! \nRing til Huston(+45 81917452) og sig \"Fejlkode DBConnection\"!");
+            }catch (ClassNotFoundException ex) {
+                ex.printStackTrace();
+                throw new LoginSampleException("Huston, we've got a problem! \nRing til Huston(+45 81917452) og sig \"Fejlkode jdbc.Driver\"!");
+            }
         }
         return singleton;
     }

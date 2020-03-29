@@ -39,7 +39,7 @@ public class ShowCart extends Command {
                     "Kontakt butikken for at indbetale på din konto, slet nogle af Cupcakes fra din indkøbskurv eller slet ordre ";
 
         }else{
-            payStatus =  "Bekræft din bestiling ved at klikke \"Betal\" knappen";
+            payStatus =  "Bekræft din bestiling ved at klikke på \"Betal\" knappen";
 
         }
         request.setAttribute("payStatus", payStatus);

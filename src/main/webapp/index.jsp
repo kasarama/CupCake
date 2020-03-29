@@ -42,7 +42,7 @@
                             <option value="Almond">Almond</option>
                         </select>
                         <br>
-                        Vælg topping
+                        Vælg top
                         <select class="form-control" name="topping" value="Vælg topping">
                             <option value="Chocolate">Chocolate</option>
                             <option value="Blueberry">Blueberry</option>
@@ -64,8 +64,11 @@
                 <div class="form-group col-md-8 col-sm-8 col-lg-3">
                 </div>
             </div>
-
-
+    <c:if test = "${requestScope.error!= null}" >
+        <div class="card mb-4 shadow-sm">
+            <h2>${requestScope.error}</h2>
+        </div>
+    </c:if>
 </div>
 
 
