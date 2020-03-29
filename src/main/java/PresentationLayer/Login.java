@@ -27,9 +27,7 @@ public class Login extends Command {
                 page = request.getParameter("origin");
             }
 
-            if (email.equals("admin@olsker.cupcakes")) {
-                page = "adminpage";
-            }
+
 
 
 
@@ -43,7 +41,11 @@ public class Login extends Command {
             HttpSession session = request.getSession();
             session.setAttribute("email", customer.getEmail());
             session.setAttribute("firstName", customer.getFirstName());
-            page="customerpage";
+            if (email.equals("admin@olsker.cupcakes")) {
+                page = "adminpage";
+            } else {
+                page = "customerpage";
+            }
         }
 
         Order order = OrderLines.getOrder();
