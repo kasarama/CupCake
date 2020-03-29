@@ -95,7 +95,7 @@
                     <th>
                         <form name="home" action="FrontController" method="post">
                             <input type="hidden" name="taget" value="home">
-                            <input class="btn btn-primary" type="submit" value="Tilføj fere">
+                            <input class="btn btn-primary" type="submit" value="Tilføj flere">
                         </form>
 
                     </th>

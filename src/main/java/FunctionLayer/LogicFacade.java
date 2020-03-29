@@ -25,7 +25,7 @@ public class LogicFacade {
         return customer;
     }
 
-    public static Customer createCustomer( String email, String password, String fName, String sName ) throws LoginSampleException, SQLException {
+    public static Customer createCustomer( String email, String password, String fName, String sName ) throws LoginSampleException {
         Customer customer  = new Customer(email);
         customer.setSaldo(0);
         customer.setFirstName(fName);

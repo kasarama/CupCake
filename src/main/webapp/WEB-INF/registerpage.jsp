@@ -16,8 +16,11 @@
         <div class="card mb-4 shadow-sm">
         </div>
     </div>
-
-
+    <div class="card-deck mb-3 text-center">
+        <div class="card mb-4 shadow-sm">
+            <h2>${requestScope.registerMSG}</h2>
+        </div>
+    </div>
     <div class="card-deck mb-3 text-center">
         <div class="card mb-4 shadow-sm">
             <form name="register" action="FrontController" method="POST" onsubmit="required()">
@@ -43,11 +46,7 @@
         </div>
     </div>
 
-    <div class="card-deck mb-3 text-center">
-        <div class="card mb-4 shadow-sm">
-            ${requestScope.registerMSG}
-        </div>
-    </div>
+
 
 </div>
 
@@ -63,7 +62,7 @@
 <script>
     function required()
     {
-       alert('Vi har modtaget registration form.');
+       alert('Behandling af indtastede data er i gang...');
 
     }
 

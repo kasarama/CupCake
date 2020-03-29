@@ -19,7 +19,8 @@ public class Register extends Command {
         String lName = request.getParameter("lName");
 
         String page="registerpage";
-        String registerMSG="";
+        String registerMSG="Tak fordi du vælger Olsker Cupcakes!";
+
 
         if(email.equals("") || password1.equals("") || password1.equals("") || fName.equals("") || lName.equals("")){
 
@@ -33,15 +34,12 @@ public class Register extends Command {
                    HttpSession session = request.getSession();
 
                    session.setAttribute("email", email);
-
                    session.setAttribute("firstName", customer.getFirstName());
-
                    page = "customerpage";
-               }catch (SQLException ex){
+
+               }catch (LoginSampleException ex){
                    registerMSG="Email findes allerede i vores database. Prøv igen eller log ind";
-
                }
-
 
         } else
             if (!password1.equals(password2)){
@@ -53,6 +51,8 @@ public class Register extends Command {
         } else {
                 registerMSG="System fejl nr 666. Kontak vnligst butikken: (tlf) 81819292";
             }
+
+
         request.setAttribute("registerMSG", registerMSG);
 
         Order order = OrderLines.getOrder();
