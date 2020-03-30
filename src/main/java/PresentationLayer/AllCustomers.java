@@ -16,4 +16,13 @@ public class AllCustomers extends Command {
 
         return "allCustomers";
     }
+
+    /*
+    if (request.getSession().getAttribute("email") != null) {
+            Customer[] allCustomers = CustomerMapper.listOfCustomersWithOrders();
+            request.setAttribute("allCustomers", allCustomers);
+            return "allCustomers";
+        } else return "index";
+    }
+     */
 }

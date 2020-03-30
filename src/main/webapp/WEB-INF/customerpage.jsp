@@ -18,6 +18,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Velkommen ombord ${sessionScope.firstName}!</h5>
                         <p class="card-text">Det er godt at se dig igen!</p>
+                        <p class="card-text">Din saldo: ${requestScope.saldo} kr.</p>
 
                     </div>
                 </div>

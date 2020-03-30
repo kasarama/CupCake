@@ -12,32 +12,23 @@ object Bruger {
 object Kunde {
     liste med ordrer
 }
-
 object Administrator {
-
 }
-
 object Konto {
     saldo
     }
-
 object Cupcake {
     bund
     top
     pris
 }
-
 object Ordre {
     ID
     liste med Cupcake
     sum
 }
-
-
 object Kurv {
-
 }
-
 Bruger "1" -- "1" Kunde
 Bruger "1" -- "1" Administrator
 Kunde "1" -- "*" Ordre : kan lave og se
@@ -46,5 +37,152 @@ Kurv "1"--"*" Ordre : indstiller
 Bruger "1" -- "1" Konto : logger ind på
 Administrator "1" -- "*" Kunde : kan se og ændre saldo
 Administrator "1" -- "*" Ordre : kan se og slette
+
+@enduml
+
+
+
+
+@startuml
+scale 1000 width
+Title Navigation of Logging in, ordering, registering
+
+State index.jsp
+State login.jsp
+State cart.jsp
+
+State logged_in{
+cart.jsp --> confirm.jsp : Bestil Cupcakes
+confirm.jsp --> pay.jsp : Betal
+confirm.jsp --> cart.jsp : Tilbage til indkøbskurv
+}
+State logged_in{
+login.jsp --> customer.jsp : email & pw OK, origin=index
+login.jsp --> admin.jsp : email & pw OK, e-mail=admin@...
+}
+
+[*] -> index.jsp
+index.jsp --> login.jsp : Log ind
+login.jsp --> cart.jsp : email & pw OK, origin=cartpage
+login.jsp --> login.jsp : email or pw not OK
+
+register.jsp --> register.jsp : input not OK
+register.jsp --> customer.jsp : input OK
+
+index.jsp --> index.jsp : Læg i Kurv : new item in cart
+index.jsp --> cart.jsp : Cart icon
+cart.jsp --> cart.jsp : Slet
+
+cart.jsp --> login.jsp : Bestil Cupcakes - not logged in
+cart.jsp --> index.jsp : Tiføj flere / Find nogle Cupcakes her
+
+logged_in --> [*] : Log ud
+
+
+login.jsp --> register.jsp : eller Register
+
+note bottom of logged_in
+e-mail and first name
+stored in session
+end note
+
+note top of index.jsp
+Order stored in session
+end note
+
+@enduml
+
+
+
+@startuml
+
+Title Navigation from customer page
+
+state Logged_In {
+[*] -> customer.jsp
+
+
+customer.jsp : Olske Cupcakes
+customer.jsp : Min Side
+customer.jsp : Mine ordrer
+customer.jsp : Log ud
+customer.jsp : Cart icon
+
+customer.jsp --> index.jsp: Olske Cupcakes / Vælg din Cupcake
+customer.jsp --> customer.jsp: Min Side
+customer.jsp --> orders.jsp: Mine ordrer / Vis tidligere bestilinger
+customer.jsp --> cart.jsp: Cart icon / Indkøbskurv
+
+cart.jsp : Olske Cupcakes
+cart.jsp : Min Side
+cart.jsp : Mine ordrer
+cart.jsp : Log ud
+cart.jsp : Cart icon
+
+index.jsp : Olske Cupcakes
+index.jsp : Min Side
+index.jsp : Mine ordrer
+index.jsp : Log ud
+index.jsp : Cart icon
+
+orders.jsp : Olske Cupcakes
+orders.jsp : Min Side
+orders.jsp : Mine ordrer
+orders.jsp : Log ud
+orders.jsp : Cart icon
+}
+customer.jsp --> [*] : Log ud
+cart.jsp --> [*] : Log ud
+orders.jsp --> [*] : Log ud
+
+@enduml
+
+
+
+@startuml
+
+Title Navigation from admin page
+
+state Logged_In{
+
+admin.jsp : Vis Kunder
+admin.jsp : Vis Ordrer
+admin.jsp : Top-Up
+admin.jsp : Log ud
+
+
+topUp.jsp : Vis Kunder
+topUp.jsp : Vis Ordrer
+topUp.jsp : Top-Up
+topUp.jsp : Log ud
+
+allCustomers.jsp : Vis Kunder
+allCustomers.jsp : Vis Ordrer
+allCustomers.jsp : Top-Up
+allCustomers.jsp : Log ud
+
+ordersAdmin.jsp : Vis Kunder
+ordersAdmin.jsp : Vis Ordrer
+ordersAdmin.jsp : Top-Up
+ordersAdmin.jsp : Log ud
+
+[*] -> admin.jsp
+
+admin.jsp --> topUp.jsp :  Top-Up / Nu skal de...
+admin.jsp --> allCustomers.jsp : Vis Kunder / Jeg vil gerne kigge!
+admin.jsp --> ordersAdmin.jsp :  Vis Ordrer / Vis mig dem alle!
+
+
+topUp.jsp --> topUp.jsp : input OK, Slet
+topUp.jsp --> topUp.jsp : input not OK
+
+ordersAdmin.jsp --> ordersAdmin.jsp : Slet
+
+
+}
+admin.jsp --> [*] : Log ud
+topUp.jsp --> [*] : Log ud
+allCustomers.jsp --> [*] : Log ud
+ordersAdmin.jsp --> [*] : Log ud
 
 @enduml

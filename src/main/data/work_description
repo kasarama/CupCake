@@ -2,10 +2,8 @@ todo make tabel on cartpage same as on other pages
 
 
 
-todo do not display order table for those of customers that do not have orders
 todo initialize an cart-order for each session , not general
 todo display msg if list of orders of cutomer is empty insteat of a tabel
 todo saldo for unknown email???
-todo przekierowanie na login albo index jesli nie jest dministratorem lub jesli jest administratorem - så ingen rammer den side man oikke har adgang til
 
 

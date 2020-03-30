@@ -46,10 +46,6 @@ public class CustomerMapper {
            ps = con.prepareStatement(SQL);
            ResultSet rs = ps.executeQuery();
 
-
-           //throw new LoginSampleException("Huston, we've got a problem! \nRing til Huston(+45 81917452) og sig \"Fejlkode LoginQuery\"!");
-
-
            if (rs.next()) {
                String fName = rs.getString("firstName");
                String sName = rs.getString("lastName");

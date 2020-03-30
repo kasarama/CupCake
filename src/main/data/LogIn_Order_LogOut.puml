@@ -1,0 +1,61 @@
+
+@startuml
+
+Title Logging in, ordering, logging out
+
+State index.jsp
+State login.jsp
+State cart.jsp
+State customer.jsp
+State confirm.jsp
+State pay.jsp
+State register.jsp
+State admin.jsp
+
+[*] -> index.jsp
+index.jsp --> login.jsp : Log ind
+login.jsp --> cart.jsp : email & pw OK, origin=cartpage
+login.jsp --> login.jsp : email or pw not OK
+login.jsp --> customer.jsp : email & pw OK, origin=index
+login.jsp --> admin.jsp : email & pw OK, e-mail=admin@...
+
+
+index.jsp --> index.jsp : Læg i Kurv : new item in cart
+index.jsp --> cart.jsp : Cart icon
+cart.jsp --> cart.jsp : Slet
+
+cart.jsp --> login.jsp : Bestil Cupcakes - not logged in
+cart.jsp --> index.jsp : Tiføj flere / Find nogle Cupcakes her
+cart.jsp --> confirm.jsp : Bestil Cupcakes
+
+confirm.jsp --> cart.jsp : Tilbage til indkøbskurv
+confirm.jsp --> pay.jsp : Betal
+
+register.jsp --> register.jsp : input not OK
+register.jsp --> customer.jsp : input OK
+
+customer.jsp --> [*] : Log ud
+admin.jsp --> [*] : Log ud
+cart.jsp --> [*] : Log ud
+
+
+login.jsp --> register.jsp : eller Register
+
+note left of customer.jsp
+e-mail and first name
+stored in session
+end note
+
+note left of cart.jsp
+if logged in:
+e-mail and first name
+stored in session
+end note
+
+note top of admin.jsp
+e-mail and first name
+stored in session
+end note
+
+
+@enduml

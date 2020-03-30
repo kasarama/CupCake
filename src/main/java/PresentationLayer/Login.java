@@ -1,5 +1,6 @@
 package PresentationLayer;
 
+import DBAccess.CustomerMapper;
 import FunctionLayer.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -44,6 +45,11 @@ public class Login extends Command {
             if (email.equals("admin@olsker.cupcakes")) {
                 page = "adminpage";
             } else {
+                try {
+                    request.setAttribute("saldo", CustomerMapper.saldo(email));
+                } catch (LoginSampleException e) {
+                    request.setAttribute("saldo", null);
+                }
                 page = "customerpage";
             }
         }
