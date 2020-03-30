@@ -53,7 +53,7 @@
                              <input class="btn btn-outline-secondary" type="submit" value="Min Side">
                         </form>
 
-                       
+
                 </li>
 
                     </c:otherwise>
