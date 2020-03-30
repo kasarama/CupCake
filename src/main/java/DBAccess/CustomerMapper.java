@@ -129,81 +129,84 @@ public class CustomerMapper {
         //todo make a list of customers that have some orders in DB(cupcake.order)
         //todo get all ordered cupcakes from DB and put them to appropriate orders
         //todo put orders to appropriate customers
-
-        Customer[] listOfCustomers = new Customer[numberOfCustomers()];
-
-
-        try {
-            Connection con = Connector.connection();
-            String customersSQL = "select users.email, firstname, lastname, saldo from users where not email='admin@olsker.cupcakes' group by email";
-            String ordersSQL = "select orderID, email, sum from orders where comment='Paid'";
-            String cupcakesSQL = "select * from orderdetails";
-            int index = 0;
-
-            PreparedStatement ps = con.prepareStatement(customersSQL);
-            ResultSet resultSet = ps.executeQuery();
-
-            while (resultSet.next()) {
-
-                String email = resultSet.getString("email");
-                String firstName = resultSet.getString("firstName");
-                String lastName = resultSet.getString("lastName");
-                int saldo = resultSet.getInt("saldo");
-                Customer customer = new Customer(email);
-                customer.setFirstName(firstName);
-                customer.setLastName(lastName);
-                customer.setSaldo(saldo);
-                listOfCustomers[index] = customer;
-                index++;
-            }
+        int numberOfCustomers = numberOfCustomers();
+        if (numberOfCustomers == 0) {
+            return null;
+        } else {
+            Customer[] listOfCustomers = new Customer[numberOfCustomers];
 
 
-            ps = con.prepareStatement(ordersSQL);
-            resultSet = ps.executeQuery();
-            while (resultSet.next()) {
-                int orderID = resultSet.getInt("orderID");
-                String email = resultSet.getString("email");
-                int sum = resultSet.getInt("sum");
-                Order order = new Order();
-                order.setId(orderID);
-                order.setSum(sum);
+            try {
+                Connection con = Connector.connection();
+                String customersSQL = "select users.email, firstname, lastname, saldo from users where not email='admin@olsker.cupcakes' group by email";
+                String ordersSQL = "select orderID, email, sum from orders where comment='Paid'";
+                String cupcakesSQL = "select * from orderdetails";
+                int index = 0;
 
-                for (int i = 0; i < listOfCustomers.length; i++) {
+                PreparedStatement ps = con.prepareStatement(customersSQL);
+                ResultSet resultSet = ps.executeQuery();
 
+                while (resultSet.next()) {
 
-                    if (listOfCustomers[i].getEmail().equals(email)) {
-                        listOfCustomers[i].add(order);
-                    }
-
+                    String email = resultSet.getString("email");
+                    String firstName = resultSet.getString("firstName");
+                    String lastName = resultSet.getString("lastName");
+                    int saldo = resultSet.getInt("saldo");
+                    Customer customer = new Customer(email);
+                    customer.setFirstName(firstName);
+                    customer.setLastName(lastName);
+                    customer.setSaldo(saldo);
+                    listOfCustomers[index] = customer;
+                    index++;
                 }
-            }
 
-            ps = con.prepareStatement(cupcakesSQL);
-            resultSet = ps.executeQuery();
 
-            while (resultSet.next()) {
-                int orderID = resultSet.getInt("orderID");
-                String bottom = resultSet.getString("bottom");
-                String topping = resultSet.getString("topping");
-                int quantity = resultSet.getInt("quantity");
-                Cupcake cupcake = new Cupcake(bottom, topping);
-                for (Customer customer : listOfCustomers) {
-                    for (Order order : customer.getOrders()) {
-                        if (order.getId() == orderID) {
-                            order.addCupcake(cupcake, quantity);
+                ps = con.prepareStatement(ordersSQL);
+                resultSet = ps.executeQuery();
+                while (resultSet.next()) {
+                    int orderID = resultSet.getInt("orderID");
+                    String email = resultSet.getString("email");
+                    int sum = resultSet.getInt("sum");
+                    Order order = new Order();
+                    order.setId(orderID);
+                    order.setSum(sum);
+
+                    for (int i = 0; i < listOfCustomers.length; i++) {
+
+
+                        if (listOfCustomers[i].getEmail().equals(email)) {
+                            listOfCustomers[i].add(order);
+                        }
+
+                    }
+                }
+
+                ps = con.prepareStatement(cupcakesSQL);
+                resultSet = ps.executeQuery();
+
+                while (resultSet.next()) {
+                    int orderID = resultSet.getInt("orderID");
+                    String bottom = resultSet.getString("bottom");
+                    String topping = resultSet.getString("topping");
+                    int quantity = resultSet.getInt("quantity");
+                    Cupcake cupcake = new Cupcake(bottom, topping);
+                    for (Customer customer : listOfCustomers) {
+                        for (Order order : customer.getOrders()) {
+                            if (order.getId() == orderID) {
+                                order.addCupcake(cupcake, quantity);
+                            }
                         }
                     }
                 }
+
+            } catch (SQLException ex) {
+                throw new LoginSampleException(ex.getMessage());
             }
 
-        } catch (SQLException ex) {
-            throw new LoginSampleException(ex.getMessage());
+            return listOfCustomers;
         }
 
-        return listOfCustomers;
     }
-
-
 }
 
 

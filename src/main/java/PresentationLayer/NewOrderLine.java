@@ -9,10 +9,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-//Magdalena
+/**
+ * @author Magdalena Wawrzak
+ */
 public class NewOrderLine extends Command {
-    //todo read bottom, topping and quantity from index, create a new Cupcake, add to order ,
-    // count sum of order, count number of Cupcakes in cart
+    //todo read bottom, topping and quantity from index.jsp, create a new Cupcake, add to order , count number of Cupcakes in cart
+
+    /**
+     * Creates Cupcake from request's parameters.
+     * If session does not have an attribute "orderCart" instantiates Order at sets it on session.
+     * Adds Cupcake to the sessions Order
+     * Counts amount of Cupcakes in Order and sets it on request to be used on returned index.jsp page
+     * @param request
+     * @param response
+     * @return "index"
+     * @throws LoginSampleException
+     */
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
         String bottom = request.getParameter( "bottom" );

@@ -32,7 +32,7 @@ public class Connector {
 
                     Class.forName("com.mysql.cj.jdbc.Driver");
                     singleton = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-                
+
             }
         } catch (SQLException | ClassNotFoundException ex) {
             ex.printStackTrace();
