@@ -48,9 +48,12 @@
                         </form>
                 </li>
                 <li class="nav-item">
-                        <a href="FrontController?taget=redirect&destination=customerpage">
-                            <button type="button" class="btn btn-outline-secondary">Min side</button>
-                        </a>
+                        <form name="minSide" action="FrontController" method="post">
+                             <input type="hidden" name="taget" value="minSide">
+                             <input class="btn btn-outline-secondary" type="submit" value="Min Side">
+                        </form>
+
+                       
                 </li>
 
                     </c:otherwise>
