@@ -28,10 +28,6 @@ public class Login extends Command {
                 page = request.getParameter("origin");
             }
 
-
-
-
-
         }catch (LoginSampleException ex){
             error = ex.getMessage();
             ex.printStackTrace();
@@ -54,8 +50,11 @@ public class Login extends Command {
             }
         }
 
-        Order order = OrderLines.getOrder();
-        int items= order.items();
+        int items=0;
+        Order order = (Order) request.getSession().getAttribute("orderCart");
+        if (order!=null) {
+            items = order.items();
+        }
         request.setAttribute("cart", items);
 
 

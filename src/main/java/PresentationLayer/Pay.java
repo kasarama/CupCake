@@ -17,15 +17,15 @@ public class Pay extends Command {
         String email=request.getSession().getAttribute("email").toString();
         int saldo = CustomerMapper.saldo(email);
 
-        Order order = OrderLines.getOrder();
+        Order order = (Order) request.getSession().getAttribute("orderCart");
         order.setSum(order.sum());
         OrderMapper.newOrder(email, order, "Paid");
         CustomerMapper.updateSaldo(email, (order.getSum()*(-1)));
         saldo = CustomerMapper.saldo(email);
-        order.clear();
+        request.getSession().setAttribute("orderCart", null);
 
-        int items= order.items();
-        request.setAttribute("cart", items);
+
+        request.setAttribute("cart", 0);
 
         request.setAttribute("saldo", saldo);
 

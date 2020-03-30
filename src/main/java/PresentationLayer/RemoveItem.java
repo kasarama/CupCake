@@ -16,13 +16,14 @@ public class RemoveItem extends Command {
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
         String bottom = request.getParameter("bottom");
         String topping = request.getParameter("topping");
-        Order order = OrderLines.getOrder();
+        Order order = (Order) request.getSession().getAttribute("orderCart");
         Cupcake cupcake = new Cupcake(bottom, topping);
         int cupcakeTotalPrice = order.getProducts().get(cupcake)*cupcake.price();
 
         order.getProducts().remove(cupcake);
         order.setSum(order.getSum()-cupcakeTotalPrice);
-        order = OrderLines.getOrder();
+        request.getSession().setAttribute("orderCart", order);
+
         ArrayList<String[]> cartLines = HelpClass.orderTable(order);
         request.setAttribute("items", cartLines);
         request.setAttribute("sum", order.getSum());

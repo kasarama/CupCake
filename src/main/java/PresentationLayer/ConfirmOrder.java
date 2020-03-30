@@ -18,7 +18,7 @@ public class ConfirmOrder extends Command {
         //   show saldo after paying, show msg about saldo if low/to low
         String email=request.getSession().getAttribute("email").toString();
         int saldo= CustomerMapper.saldo(email);
-        Order order = OrderLines.getOrder();
+        Order order = (Order) request.getSession().getAttribute("orderCart");
         ArrayList<String[]> cartLines = HelpClass.orderTable(order);
 
 

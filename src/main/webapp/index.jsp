@@ -6,15 +6,7 @@
 <%@include file="includes/header.inc"%>
 
 
-<%!
-    @Override
-    public void jspInit() {
-        OrderLines.initOrder();
-    }
-%>
-<%
-    request.setAttribute("orderlines", OrderLines.getOrder());
-%>
+
 
 <div class="container" >
     <div class="card-deck mb-3 text-center">

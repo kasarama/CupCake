@@ -13,11 +13,8 @@ public class LogOut extends Command {
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
         HttpSession session = request.getSession();
 
-        Order order = OrderLines.getOrder();
-        order.clear();
-        int items= order.items();
-        request.setAttribute("cart", items);
-        session.setAttribute( "user", null );
+        session.setAttribute("orderCart", null);
+        request.setAttribute("cart", 0);
         session.setAttribute("email", null);
         session.setAttribute("firstName", null);
         return "index";

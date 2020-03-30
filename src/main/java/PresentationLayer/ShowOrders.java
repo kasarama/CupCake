@@ -27,8 +27,11 @@ public class ShowOrders extends Command {
 
         Order[] orders = OrderMapper.ListOfOrdersWithCupcakes(email);
 
-        Order order = OrderLines.getOrder();
-        int items= order.items();
+        int items=0;
+        Order order = (Order) request.getSession().getAttribute("orderCart");
+        if (order!=null) {
+            items = order.items();
+        }
         request.setAttribute("cart", items);
         request.setAttribute("saldo", saldo);
         request.setAttribute("ordersArray", orders);

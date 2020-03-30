@@ -55,8 +55,11 @@ public class Register extends Command {
 
         request.setAttribute("registerMSG", registerMSG);
 
-        Order order = OrderLines.getOrder();
-        int items= order.items();
+        int items=0;
+        Order order = (Order) request.getSession().getAttribute("orderCart");
+        if (order!=null) {
+            items = order.items();
+        }
         request.setAttribute("cart", items);
         return page;
     }

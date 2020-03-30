@@ -14,6 +14,7 @@ public class ShowCart extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
         int saldo = 0;
+        String payStatus ="";
         if(request.getSession().getAttribute("email") != null){
 
         String email=request.getSession().getAttribute("email").toString();
@@ -22,27 +23,42 @@ public class ShowCart extends Command {
         } else
             request.setAttribute("saldo", null);
 
-        Order order = OrderLines.getOrder();
-        ArrayList<String[]> cartLines = HelpClass.orderTable(order);
+        Order order = (Order) request.getSession().getAttribute("orderCart");
+        int items=0;
+        try {
+            ArrayList<String[]> cartLines = HelpClass.orderTable(order);
+            items= order.items();
+            request.setAttribute("items", cartLines);
+            request.setAttribute("sum", order.getSum());
+            int difference=saldo-order.getSum();
 
+            if (difference<0){
+                payStatus ="Du har dæsvære ikke nok penge på din konto. " +
+                        "Kontakt butikken for at indbetale på din konto, slet nogle af Cupcakes fra din indkøbskurv eller slet ordre ";
 
-        int items= order.items();
-        request.setAttribute("cart", items);
-        request.setAttribute("items", cartLines);
-        request.setAttribute("sum", order.getSum());
+            }else{
+                payStatus =  "Bekræft din bestiling ved at klikke på \"Betal\" knappen";
 
-        int difference=saldo-order.getSum();
-        String payStatus ="";
+            }
+            request.setAttribute("payStatus", payStatus);
 
-        if (difference<0){
-            payStatus ="Du har dæsvære ikke nok penge på din konto. " +
-                    "Kontakt butikken for at indbetale på din konto, slet nogle af Cupcakes fra din indkøbskurv eller slet ordre ";
+        } catch (NullPointerException ex){
 
-        }else{
-            payStatus =  "Bekræft din bestiling ved at klikke på \"Betal\" knappen";
+            System.out.println("So the order wasn't initialized");
 
         }
-        request.setAttribute("payStatus", payStatus);
+        request.setAttribute("cart", items);
+
+
+
+
+
+
+
+
+
+
+
 
 
 

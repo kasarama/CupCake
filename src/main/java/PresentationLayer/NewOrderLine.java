@@ -7,6 +7,7 @@ import FunctionLayer.OrderLines;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 //Magdalena
 public class NewOrderLine extends Command {
@@ -14,11 +15,19 @@ public class NewOrderLine extends Command {
     // count sum of order, count number of Cupcakes in cart
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
-
         String bottom = request.getParameter( "bottom" );
         String topping = request.getParameter( "topping" );
         int quantity = Integer.parseInt(request.getParameter("quantity"));
-        Order order = OrderLines.getOrder();
+        HttpSession session = request.getSession();
+
+        if(session.getAttribute("orderCart")==null) {
+            OrderLines.initOrder();
+            session.setAttribute("orderCart", new Order());
+
+        }        
+
+
+        Order order = (Order) session.getAttribute("orderCart");
         Cupcake cupcake = new Cupcake(bottom, topping);
         cupcake.setPrice(cupcake.price());
         order.addCupcake(cupcake,quantity);
@@ -27,6 +36,6 @@ public class NewOrderLine extends Command {
         int items= order.items();
         request.setAttribute("cart", items);
         return "index";
-    }
 
+    }
 }

@@ -11,10 +11,12 @@ public class Home extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
 
-        Order order = OrderLines.getOrder();
-        int items= order.items();
+        int items=0;
+        Order order = (Order) request.getSession().getAttribute("orderCart");
+        if (order!=null) {
+            items = order.items();
+        }
         request.setAttribute("cart", items);
-
         return "index";
     }
 }
